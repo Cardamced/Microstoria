@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg">
+	<div class="container-fluid">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand mx-3" href="{{ path('app_home')}}">
+			<img class="logo-nav img-fluid d-none d-md-block" src=" {{ asset('build/images/logo.png') }} " alt="Logo Externatic">
+			<img class="logo-nav-res img-fluid d-md-none d-block" src=" {{ asset('build/images/logo-res.png') }} " alt="Logo Externatic">
+		</a>
+		<div class="btn-group dropstart order-md-2">
+			<button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+				<a class="mx-3">
+					<img class="profil-nav" src=" {{ asset('build/images/profil.png') }} " alt="Section Profil">
+				</a>
+			</button>
+			<ul class="dropdown-menu">
+
+				{% if (is_granted('ROLE_ADMIN')) %}
+					<li class="nav-item my-3">
+						<a class="mx-3 text-decoration-none text-secondary text-uppercase" href="{{ path('accueil_admin') }}">Admin</a>
+					</li>
+				{% endif %}
+				{% if app.user and not (is_granted('ROLE_ADMIN')) %}
+					<li class="nav-item my-3">
+						<a class="mx-3 text-decoration-none text-secondary text-uppercase" href="{{ path('app_candidate_profile') }}">Mon profil</a>
+					</li>
+
+					<li class="nav-item my-3">
+						<a class="mx-3 text-decoration-none text-secondary text-uppercase" href="{{ path('app_favorite') }}">Mes favoris</a>
+					</li>
+
+					<li class="nav-item my-3">
+						<a class="mx-3 text-decoration-none text-secondary text-uppercase" href="{{ path('app_apply') }}">Candidatures</a>
+					</li>
+				{% elseif not app.user %}
+					<li class="nav-item my-3">
+						<a class="mx-3 text-decoration-none text-secondary text-uppercase" href="{{ path('app_register') }}">Inscription</a>
+					</li>
+				{% endif %}
+			</li>
+
+			<li class="nav-item my-3">
+				{% if app.user %}
+					<a class="mx-3 text-decoration-none text-secondary text-uppercase" href="{{ path('app_logout') }}">Déconnexion</a>
+				{% else %}
+					<a class="mx-3 text-decoration-none text-secondary text-uppercase" href="{{ path('app_login') }}">Connexion</a>
+				{% endif %}
+			</li>
+		</li>
+	</ul>
+</div>
+<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+	<ul class="navbar-nav">
+		<li class="nav-item">
+			<a class="nav-link mx-3" href="{{ path('#') }}">Ancêtres</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link mx-3" href="{{ path('#')}}">Histoire</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link mx-3" href="{{ path('company_index')}}">Sources</a>
+		</li>
+	</ul>
+</div></div></nav>
