@@ -1,6 +1,6 @@
-// src/api.js
+import { AncestorsResponse, AncestorResponse } from './types/types';
 
-export async function getAncestors() {
+export async function getAncestors(): Promise<AncestorsResponse> {
     try {
         const response = await fetch('http://localhost:3009/ancestors');
         if (!response.ok) {
@@ -14,7 +14,7 @@ export async function getAncestors() {
     }
 }
 
-export async function getAncestorsById(id) {
+export async function getAncestorsById(id: number): Promise<AncestorResponse> {
     try {
         const response = await fetch(`http://localhost:3009/ancestors/${id}`);
         if (!response.ok) {
