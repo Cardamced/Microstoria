@@ -1,1 +1,14 @@
 /* Style de la page d'affichage Ancêtre / events / sources */
+
+.h1{
+    display: flex;
+    justify-content: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    margin: 30px;
+}

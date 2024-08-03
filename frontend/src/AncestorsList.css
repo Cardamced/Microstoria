@@ -1,34 +1,25 @@
-ul {
+.coucou {
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;
-}
-
-li:nth-child(3) {
-    color: blue;
-}
-
-li:nth-child(5) {
-    color: red;
-}
-
-ul:first-child {
-    margin: 10px;
-}
-
-ul{
-    padding: 20px;
-}
-
-li {
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
     height: auto;
-    width: max-content;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.h1{
+    display: flex;
+    justify-content: center;
+}
+
+.cards > * {
+    flex: 1 1 calc(33.333% - 20px); /* Trois cartes par ligne */
     margin: 10px;
-    padding: 10px;
-    border: 2px solid rgb(13, 5, 105);
-    border-radius: 5px;
-    list-style-type: none;
-    &:hover {
-        background-color: gold;
-    }
+    box-sizing: border-box;
 }

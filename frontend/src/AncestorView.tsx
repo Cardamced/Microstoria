@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getAncestorsById } from "./api-fetch-ancestors.tsx";
 import { AncestorResponse } from "./types/types.ts";
 import AncestorCard from "./AncestorCard.tsx";
+import "./AncestorView.css";
 
 export default function AncestorView() {
   const { id } = useParams<{ id: string }>();
@@ -52,8 +53,11 @@ export default function AncestorView() {
   return (
     <>
       <div>
+        <h1>Vue de l'ancêtre</h1>
         {ancestor ? (
-          <AncestorCard ancestor={ancestor} />
+          <div className="cards">
+            <AncestorCard ancestor={ancestor} />
+          </div>
         ) : (
           <div>Loading...</div>
         )}
