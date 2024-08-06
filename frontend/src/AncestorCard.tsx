@@ -7,10 +7,12 @@ interface AncestorCardProps {
 
 // On définit une variable AncestorCard qui prend en paramètre un objet ancestor en prop.
 const AncestorCard: React.FC<AncestorCardProps> = ({ ancestor }) => {
+  const placeholderImage: string = "./public/Placeholder-Man.jpg";
   return (
     <div className="card">
       <div>
         {ancestor.firstname} {ancestor.lastname}
+        <img src={placeholderImage} alt="photo d'ancêtre" />
         <p>Sexe: {ancestor.gender}</p>
         {/* TODO : intégrer une {ancestor.image} */}
         {/* <p>Date de naissance: {ancestor.birthdate}</p> */}
