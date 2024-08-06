@@ -4,6 +4,7 @@ export interface Ancestor {
     id: number;
     lastname: string | null;
     firstname: string | null;
+    image: string | null;
     birthdate: Date | null;
     birth_place: string | null;
     wedding_date: Date | null;

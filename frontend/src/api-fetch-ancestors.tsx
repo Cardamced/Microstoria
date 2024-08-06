@@ -4,7 +4,7 @@ export async function getAncestors(): Promise<AncestorsResponse> {
     try {
         const response = await fetch('http://localhost:3009/ancestors');
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response wasn\'t ok');
         }
         const data = await response.json();
         return data;
