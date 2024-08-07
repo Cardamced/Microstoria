@@ -1,0 +1,14 @@
+.form-style {
+    background-color: var(--primary-dark-blue);
+    display: flex;
+    color: white;
+    justify-content: center;
+    padding: 10px;
+}
+
+input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}

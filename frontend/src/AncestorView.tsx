@@ -4,7 +4,7 @@ import { getAncestorsById } from "./api-fetch-ancestors";
 import { AncestorResponse } from "./types/types";
 import AncestorCard from "./AncestorCard";
 import "./AncestorView.css";
-import AncestorNewForm from "./AncestorNewForm";
+// import AncestorNewForm from "./AncestorNewForm";
 
 export default function AncestorView() {
   const { id } = useParams<{ id: string }>();
@@ -58,9 +58,9 @@ export default function AncestorView() {
   // - Events
   return (
     <>
-      <div>
+      {/* <div>
         <AncestorNewForm />
-      </div>
+      </div> */}
       <div>
         <h1>Vue de l'ancêtre</h1>
         {ancestor ? (
