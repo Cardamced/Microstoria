@@ -1,15 +1,21 @@
 import react, { useState, useEffect } from "react";
-// import PropTypes from 'prop-types'; // Import the prop-types library
-import { useParams } from "react-router-dom";
-import { getAncestorsById } from "./api-fetch-ancestors.tsx";
-import { AncestorResponse } from "./types/types.ts";
-import AncestorCard from "./AncestorCard.tsx";
+import { useParams, useNavigate } from "react-router-dom";
+import { getAncestorsById } from "./api-fetch-ancestors";
+import { AncestorResponse } from "./types/types";
+import AncestorCard from "./AncestorCard";
 import "./AncestorView.css";
+import AncestorNewForm from "./AncestorNewForm";
 
 export default function AncestorView() {
   const { id } = useParams<{ id: string }>();
   const [ancestor, setAncestor] = useState<AncestorResponse | null>(null); // Utilisation de l'état pour stocker les ancêtres
   const [error, setError] = useState<Error | null>(null);
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/ancestors");
+  };
 
   useEffect(() => {
     console.log("coucou");
@@ -53,20 +59,25 @@ export default function AncestorView() {
   return (
     <>
       <div>
+        <AncestorNewForm />
+      </div>
+      <div>
         <h1>Vue de l'ancêtre</h1>
         {ancestor ? (
           <div className="cards">
-            <AncestorCard ancestor={ancestor} />
+            <AncestorCard ancestor={ancestor} onClick={handleButtonClick} />
           </div>
         ) : (
           <div>Loading...</div>
         )}
+        <button onClick={handleButtonClick}>
+          <img
+            src="./../public/backArrow.png"
+            alt="Retour vers la liste des ancêtres"
+            style={{ height: "40px", width: "40px" }}
+          />
+        </button>
       </div>
     </>
   );
 }
-
-// Add prop validation for ancestorId
-// AncestorView.propTypes = {
-//     ancestorId: PropTypes.string.isRequired,
-// };

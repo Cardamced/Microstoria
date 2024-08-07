@@ -7,7 +7,8 @@
     height: auto;
     margin: 0.5rem;
     padding: 0.5rem;
-    border: 2px solid #e0e0e0;
+    /* border: 4px solid #e0e0e0; */
+    border: 4px solid var(--primary-dark-green);
     border-radius: 0.5rem;
     background-color: #f5f5f5;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
@@ -20,6 +21,6 @@
 
 .cards > * {
     flex: 1 1 calc(33.333% - 20px); /* Trois cartes par ligne */
-    margin: 10px;
+    margin: 15px;
     box-sizing: border-box;
 }
