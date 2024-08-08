@@ -1,14 +1,35 @@
-.form-style {
-    background-color: var(--primary-dark-blue);
+form {
     display: flex;
-    color: white;
-    justify-content: center;
-    padding: 10px;
+    flex-direction: column;
+    background-color: beige;
+    align-items: center;
+    color: var(--primary-dark-blue);
+    padding: 5px;
+    border: 2px solid var(--primary-dark-blue);
+    border-radius: 15px;
+    width: 50%;
 }
 
-input {
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Pour que les éléments occupent toute la largeur du form */
+    max-width: 380px; /* Ajustez selon vos besoins */
+    margin-bottom: 5px;
+}
+
+
+.input-style {
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 2px solid var(--primary-dark-blue);
+}
+
+.label-style {
+display: flex;
+    color: var(--primary-dark-blue);
+    margin: 5px;
 }

@@ -6,7 +6,15 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  /* background-color: black; */
+  width: 100%;
+  height: auto;
 }
+
+/* body{
+  background-color: black;
+  color: white;
+} */
 
 .logo {
   height: 6em;
@@ -51,4 +59,5 @@
   /* font-family: 'Roboto', sans-serif; */
   font-family: 'Great Vibes', sans-serif;
   font-size: 3.5em;
+  color: var(--primary-dark-blue);
 }
