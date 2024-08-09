@@ -8,7 +8,28 @@ import "./AncestorNewForm.css";
 
 type FormData = Ancestor;
 
-export default function CreateNewAncestor2() {
+// Création d'un fonction qui transforme les chaînes vides en "null" pour les valeurs du formulaire.
+// Évite les erreurs de valeurs incorrectes et les erreurs 404 Cannot POST.
+
+//1)  <T> est un type générique. Il permet de définir un type de manière dynamique.
+// La fonction attendra le même type que le type de l'objet.
+//2)  On crée ensuite un nouvel objet auquel on assigne toutes les propriétés
+// de l'objet passé en paramètre grâce au spread operator.
+//3) On parcourt ensuite toutes les propriétés de l'objet avec une boucle for...in.
+// les conditions vérifient la valeur des associées aux clés et les change en "null" si elles sont vides.
+//4) On return le nouvel objet avec les valeurs modifiées.
+
+function convertEmptyStringsToNull<T>(obj: T): T {
+  const newObj = { ...obj };
+  for (const key in newObj) {
+    if (newObj[key as keyof T] === '') {
+      newObj[key as keyof T] = null as any;
+    }
+  }
+  return newObj;
+}
+
+export default function CreateAncestor() {
   const {
     register,
     setValue,
@@ -17,19 +38,21 @@ export default function CreateNewAncestor2() {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
+    // Convertir les chaînes vides en null
+    const dataToSubmit = convertEmptyStringsToNull(data);
     try {
-      const response = await fetch(`https://api.localhost:3009/ancestors`, {
+      const response = await fetch("http://localhost:3009/ancestors/new", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "content-type": "application/json", // indique que le corps de la requête est au format json.
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dataToSubmit),
       });
       if (!response.ok) {
         throw new Error("Erreur lors de l'enregistrement des données");
       }
 
-      const result = await response.json();
+      const result = await response.json(); // sert à parser la réponse json.
       console.log("enregistrement réussi :", result);
       // TODO : ajouter ici une modale indiquant le succès de l'opération
     } catch (error) {
@@ -90,13 +113,7 @@ export default function CreateNewAncestor2() {
           <label className="label-style">Métier</label>
           <input className="input-style" {...register("occupation")} />
         </div>
-        <button
-          type="submit"
-          onClick={() => {
-          }}
-        >
-          Enregistrer
-        </button>
+        <button type="submit">Enregistrer</button>
       </form>
     </>
   );

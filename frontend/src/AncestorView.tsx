@@ -72,7 +72,7 @@ export default function AncestorView() {
         )}
         <button onClick={handleButtonClick}>
           <img
-            src="./../public/backArrow.png"
+            src="./../../backArrow.png"
             alt="Retour vers la liste des ancêtres"
             style={{ height: "40px", width: "40px" }}
           />
