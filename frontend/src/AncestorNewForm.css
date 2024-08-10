@@ -15,13 +15,15 @@ form {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100%; /* Pour que les éléments occupent toute la largeur du form */
-    max-width: 380px; /* Ajustez selon vos besoins */
+    width: 100%;
+    /* Pour que les éléments occupent toute la largeur du form */
+    max-width: 380px;
+    /* Ajustez selon vos besoins */
     margin-bottom: 5px;
 }
 
 
-.input-style {
+.input-style, .select {
     margin: 10px;
     padding: 5px;
     border-radius: 5px;
@@ -29,7 +31,27 @@ form {
 }
 
 .label-style {
-display: flex;
+    display: flex;
     color: var(--primary-dark-blue);
     margin: 5px;
+}
+
+.select {
+    width: 195px;
+    height: 30px;
+}
+
+.modal {
+    display: flex;
+    position:absolute;
+    top: 50%;
+    left: 40%;
+    background-color: rgba(0, 128, 0, 0.321);
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark-blue);
+    padding: 5px;
+    border: 2px solid var(--primary-dark-blue);
+    border-radius: 15px;
+    width: 600px;
 }
