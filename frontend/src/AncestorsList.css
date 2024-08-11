@@ -20,7 +20,7 @@
 }
 
 .cards > * {
-    flex: 1 1 calc(33.333% - 20px); /* Trois cartes par ligne */
+    flex: 1 1 calc(33.333% - 20px); /*Trois cartes par ligne*/
     margin: 15px;
     box-sizing: border-box;
 }
