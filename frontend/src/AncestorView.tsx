@@ -4,13 +4,12 @@ import { getAncestorsById } from "./api-fetch-ancestors";
 import { AncestorResponse } from "./types/types";
 import AncestorCard from "./AncestorCard";
 import "./AncestorView.css";
-// import AncestorNewForm from "./AncestorNewForm";
+import AncestorDeletion from "./AncestorDeletion";
 
-export default function AncestorView() {
+export default function AncestorView({ ancestorId }: { ancestorId: number }) {
   const { id } = useParams<{ id: string }>();
   const [ancestor, setAncestor] = useState<AncestorResponse | null>(null); // Utilisation de l'état pour stocker les ancêtres
   const [error, setError] = useState<Error | null>(null);
-
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -18,7 +17,6 @@ export default function AncestorView() {
   };
 
   useEffect(() => {
-    console.log("coucou");
     const fetchAncestorById = async () => {
       try {
         const numericId = Number(id); // Convertissez l'ID en nombre
@@ -26,30 +24,18 @@ export default function AncestorView() {
           throw new Error("Invalid ID");
         }
         const data = await getAncestorsById(numericId);
-        const transformedData = {
-          ...data,
-          birthdate: data.birthdate
-            ? new Date(data.birthdate).toLocaleDateString()
-            : null,
-          wedding_date: data.wedding_date
-            ? new Date(data.wedding_date).toLocaleDateString()
-            : null,
-          death_date: data.death_date
-            ? new Date(data.death_date).toLocaleDateString()
-            : null,
-        };
         setAncestor(data);
-        console.log("Fetched ancestor", transformedData);
+        console.log("Fetched ancestor", data);
       } catch (error) {
         setError(error as Error);
       }
     };
 
     fetchAncestorById();
-  }, []);
+  }, [id]);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="error">Error: {error.message}</div>;
   }
 
   // TODO : Créer la page d'affichage d'un ancêtre qui appelera :
@@ -58,9 +44,6 @@ export default function AncestorView() {
   // - Events
   return (
     <>
-      {/* <div>
-        <AncestorNewForm />
-      </div> */}
       <div>
         <h1>Vue de l'ancêtre</h1>
         {ancestor ? (
@@ -78,6 +61,7 @@ export default function AncestorView() {
           />
         </button>
       </div>
+      {ancestor && <AncestorDeletion ancestorId={Number(id)} />}
     </>
   );
 }

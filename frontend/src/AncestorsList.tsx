@@ -4,8 +4,9 @@ import { getAncestors } from "./api-fetch-ancestors";
 import "./AncestorsList.css";
 import { AncestorsResponse } from "./types/types";
 import AncestorCard from "./AncestorCard";
+import AncestorDeletion from "./AncestorDeletion";
 
-export default function AncestorsList() {
+export default function AncestorsList({ id }: { id: number }) {
   const [ancestors, setAncestors] = useState<AncestorsResponse | null>([]); // Utilisation de l'état pour stocker les ancêtres
   const [error, setError] = useState<Error | null>(null);
 
@@ -29,7 +30,7 @@ export default function AncestorsList() {
   }, []);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="error">Error: {error.message}</div>;
   }
 
   return (
@@ -53,6 +54,15 @@ export default function AncestorsList() {
             <div>Pas d'ancêtre...</div>
           )}
         </div>
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            navigate("/ancestors/new");
+          }}
+        >
+          Créer un nouvel ancêtre
+        </button>
       </div>
     </>
   );

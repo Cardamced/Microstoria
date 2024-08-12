@@ -14,7 +14,7 @@
 }
 
 button {
-    /* display: flex; */
+    /* display: flex;*/
     justify-content: center;
     margin: 10px;
     padding: 12px;
@@ -25,4 +25,13 @@ button {
 button:hover {
     background-color: var(--primary-light-blue);
     border: 3px solid var(--primary-dark-blue);
+}
+
+.error {
+    height: 60px;
+    width: auto;
+    background-color: rgba(255, 0, 0, 0.533);
+    border: 3px solid black;
+    border-radius: 15px;
+    align-content: center;
 }
