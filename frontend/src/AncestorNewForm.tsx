@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { fr } from "date-fns/locale";
+import { format } from 'date-fns';
 import "react-datepicker/dist/react-datepicker.css";
 import { Ancestor } from "./types/types";
 import { Gender } from "./../../backend/src/ancestors/ancestor.entity";
@@ -47,6 +48,26 @@ export default function CreateAncestor() {
   const [showSuccessModal, setShowSuccessModal] = useState<Boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
   const navigate = useNavigate();
+  const dateFormat = "dd/MM/yyyy"; // Changer le format ici
+  const dateSpan = {startDate: new Date(-62135596800000), endDate: new Date()};
+
+  // function convertDatesToNumbers(dateSpan: { startDate: Date, endDate: Date }) {
+  //   const startDateNumber = Number(dateSpan.startDate.getTime());
+  //   const endDateNumber = Number(dateSpan.endDate.getTime());
+  //   // return { startDateNumber, endDateNumber };
+  //   const result = endDateNumber - startDateNumber;
+  //   return result
+  // }
+
+  function calculateYearDifference(dateSpan: { startDate: Date, endDate: Date }) {
+    const millisecondsInAYear = 1000 * 60 * 60 * 24 * 365.25; // Prendre en compte les années bissextiles
+    const yearDifference = Math.floor(
+      (dateSpan.endDate.getTime() - dateSpan.startDate.getTime()) /
+        millisecondsInAYear
+    );
+    console.log(yearDifference);
+    return yearDifference;
+  }
 
   const handleGenderChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -120,9 +141,15 @@ export default function CreateAncestor() {
                 className="input-style-date"
                 onChange={(date: Date | null) => onChange(date)}
                 selected={value || null}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Choisissez une date"
+                minDate={dateSpan.startDate}
+                maxDate={dateSpan.endDate}
+                dateFormat={dateFormat}
+                placeholderText="jj/mm/aa ou choisissez..."
                 locale={fr}
+                showMonthDropdown
+                showYearDropdown // Allows dropdown for year selection
+                scrollableYearDropdown // Allows scrolling through years
+                yearDropdownItemNumber={calculateYearDifference(dateSpan)}
               />
             )}
           />
@@ -141,10 +168,15 @@ export default function CreateAncestor() {
                 className="input-style-date"
                 onChange={(date: Date | null) => onChange(date)}
                 selected={value || null}
-                minDate={new Date("1600-01-01")}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Choisissez une date"
+                minDate={dateSpan.startDate}
+                maxDate={dateSpan.endDate}
+                dateFormat={dateFormat}
+                placeholderText="jj/mm/aa ou choisissez..."
                 locale={fr}
+                showMonthDropdown
+                showYearDropdown // Allows dropdown for year selection
+                scrollableYearDropdown // Allows scrolling through years
+                yearDropdownItemNumber={calculateYearDifference(dateSpan)}
               />
             )}
           />
@@ -163,9 +195,15 @@ export default function CreateAncestor() {
                 className="input-style-date"
                 onChange={(date: Date | null) => onChange(date)}
                 selected={value || null}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Choisissez une date"
+                minDate={dateSpan.startDate}
+                maxDate={dateSpan.endDate}
+                dateFormat={dateFormat}
+                placeholderText="jj/mm/aa ou choisissez..."
                 locale={fr}
+                showMonthDropdown
+                showYearDropdown // Allows dropdown for year selection
+                scrollableYearDropdown // Allows scrolling through years
+                yearDropdownItemNumber={calculateYearDifference(dateSpan)}
               />
             )}
           />
