@@ -2,13 +2,14 @@ import * as React from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SingleFileUploader from "./components/SingleFileUploader";
 import DatePicker from "react-datepicker";
 import { fr } from "date-fns/locale";
-import { format } from 'date-fns';
-import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 import { Ancestor } from "./types/types";
 import { Gender } from "./../../backend/src/ancestors/ancestor.entity";
 import "./AncestorNewForm.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 type FormData = Ancestor;
 
@@ -20,9 +21,15 @@ interface FormDataTemp {
 
 const transformToFormDataTemp = (formData: FormData): FormDataTemp => {
   return {
-    birthdate: formData.birthdate ? formData.birthdate.toISOString().split('T')[0] : null,
-    wedding_date: formData.wedding_date ? formData.wedding_date.toISOString().split('T')[0] : null,
-    death_date: formData.death_date ? formData.death_date.toISOString().split('T')[0] : null,
+    birthdate: formData.birthdate
+      ? formData.birthdate.toISOString().split("T")[0]
+      : null,
+    wedding_date: formData.wedding_date
+      ? formData.wedding_date.toISOString().split("T")[0]
+      : null,
+    death_date: formData.death_date
+      ? formData.death_date.toISOString().split("T")[0]
+      : null,
   };
 };
 
@@ -47,9 +54,13 @@ export default function CreateAncestor() {
   const [isSubmitted, setIsSubmitted] = useState<Boolean>(false);
   const [showSuccessModal, setShowSuccessModal] = useState<Boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
   const navigate = useNavigate();
-  const dateFormat = "dd/MM/yyyy"; // Changer le format ici
-  const dateSpan = {startDate: new Date(-62135596800000), endDate: new Date()};
+  const dateFormat = "dd/MM/yyyy"; // variable qui change le format attendu.
+  const dateSpan = {
+    startDate: new Date(-62135596800000),
+    endDate: new Date(),
+  };
 
   // function convertDatesToNumbers(dateSpan: { startDate: Date, endDate: Date }) {
   //   const startDateNumber = Number(dateSpan.startDate.getTime());
@@ -59,13 +70,15 @@ export default function CreateAncestor() {
   //   return result
   // }
 
-  function calculateYearDifference(dateSpan: { startDate: Date, endDate: Date }) {
+  function calculateYearDifference(dateSpan: {
+    startDate: Date;
+    endDate: Date;
+  }) {
     const millisecondsInAYear = 1000 * 60 * 60 * 24 * 365.25; // Prendre en compte les années bissextiles
     const yearDifference = Math.floor(
       (dateSpan.endDate.getTime() - dateSpan.startDate.getTime()) /
         millisecondsInAYear
     );
-    console.log(yearDifference);
     return yearDifference;
   }
 
@@ -75,11 +88,27 @@ export default function CreateAncestor() {
     setValue("gender", e.target.value as Gender);
   };
 
+  const handleUploadSuccess = (imageUrl: string | null) => {
+    console.log("URL de l'image après téléversement :", imageUrl);
+    setUploadedImageUrl(`${imageUrl}`);
+    setValue("image", imageUrl); // Enregistrer l'URL de l'image dans le formulaire
+  };
+
+  if (uploadedImageUrl) {
+    console.log(
+      "URL de l'image à afficher dans AncestorNewForm :",
+      uploadedImageUrl
+    );
+  }
+
   const onSubmit: SubmitHandler<FormData> = async (formData: FormData) => {
     setIsSubmitted(true);
 
     const formDataTemp: FormDataTemp = transformToFormDataTemp(formData);
-    const dataToSubmit = convertEmptyStringsToNull({ ...formData, ...formDataTemp });
+    const dataToSubmit = convertEmptyStringsToNull({
+      ...formData,
+      ...formDataTemp,
+    });
 
     try {
       const response = await fetch("http://localhost:3009/ancestors/new", {
@@ -131,6 +160,26 @@ export default function CreateAncestor() {
           <label className="label-style">Image</label>
           <input className="input-style" {...register("image")} />
         </div>
+        <SingleFileUploader onUploadSuccess={handleUploadSuccess} />
+        {uploadedImageUrl && (
+          <img
+            // src={`${uploadedImageUrl}`}
+            src={uploadedImageUrl}
+            alt="Image uploadée 2"
+            style={{
+              width: "160px",
+              height: "160px",
+              border: "solid 2px black",
+              borderRadius: "5px",
+              zIndex: 10,
+            }}
+          />
+        )}
+        <img
+          src="http://localhost:3009/uploads/file-1723766021253-903546706.jpg"
+          alt="raté pas d'image"
+          style={{ height: "80px", width: "80px", border: "2px solid red" }}
+        />
         <div className="input-container">
           <label className="label-style">Date de naissance</label>
           <Controller

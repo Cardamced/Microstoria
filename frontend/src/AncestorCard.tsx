@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { AncestorResponse } from "../src/types/types";
 import "./AncestorCard.css";
 import "./index.css";
@@ -9,6 +10,18 @@ interface AncestorCardProps {
 
 // On définit une variable AncestorCard qui prend en paramètre un objet ancestor et la fonction onClick en prop.
 const AncestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [shouldShowButton, setShouldShowButton] = useState<boolean>(false);
+  const occupationRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // vérifie la hauteur du contenu pour déterminer si le bouton d'expansion doit apparaître ou non.
+    if (occupationRef.current) {
+      const { scrollHeight, clientHeight } = occupationRef.current;
+      setShouldShowButton(scrollHeight > clientHeight);
+    }
+  }, []);
+
   const formatDate = (date: string | Date | null): string => {
     if (date) {
       const dateObject = new Date(date);
@@ -72,9 +85,25 @@ const AncestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
             {" "}
             {ancestor.death_place ? ancestor.death_place : " - "}
           </p>
-          <p className="styled-fonts" data-label="Métier :">
+          <p
+            ref={occupationRef}
+            className={`styled-fonts ${isExpanded ? "expanded" : ""}`}
+            data-label="Métier :"
+          >
             {" "}
             {ancestor.occupation ? ancestor.occupation : " - "}
+            {shouldShowButton && (
+              <button
+                className="read-more-btn"
+                onClick={(e) => {
+                  e.stopPropagation(); // Empêche le clic de propager à la carte
+                  setIsExpanded(!isExpanded);
+                }}
+                aria-label={isExpanded ? "Réduire" : "En lire plus"}
+              >
+                {isExpanded ? "▲" : "▼"}
+              </button>
+            )}
           </p>
           <p className="styled-fonts" data-label="Sosa :">
             {" "}
