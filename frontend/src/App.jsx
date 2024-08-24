@@ -4,7 +4,7 @@ export default function App() {
 
   return (
     <>
-      <h1>Microstoria</h1>
+      <h1 className="HomeStyle">Microstoria</h1>
     </>
   );
 }

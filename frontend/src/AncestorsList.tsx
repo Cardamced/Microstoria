@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAncestors } from "./api-fetch-ancestors";
 import "./AncestorsList.css";
-import { AncestorsResponse } from "./types/types.ts";
+import { AncestorsResponse } from "./types/types";
 import AncestorCard from "./AncestorCard";
+import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
 
-export default function AncestorsList() {
+export default function AncestorsList({ id }: { id: number }) {
   const [ancestors, setAncestors] = useState<AncestorsResponse | null>([]); // Utilisation de l'état pour stocker les ancêtres
   const [error, setError] = useState<Error | null>(null);
+
+  const navigate = useNavigate();
+
+  const handleCardClick = (id: string) => {
+    navigate(`/ancestors/${id}`);
+  };
 
   useEffect(() => {
     async function fetchAncestors() {
@@ -22,7 +30,7 @@ export default function AncestorsList() {
   }, []);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="error">Error: {error.message}</div>;
   }
 
   return (
@@ -33,7 +41,11 @@ export default function AncestorsList() {
           {ancestors ? (
             ancestors.length > 0 ? (
               ancestors.map((ancestor) => (
-                <AncestorCard key={ancestor.id} ancestor={ancestor} />
+                <AncestorCard
+                  key={ancestor.id}
+                  ancestor={ancestor}
+                  onClick={() => handleCardClick(ancestor.id.toString())}
+                />
               ))
             ) : (
               <div>Loading...</div>
@@ -42,6 +54,15 @@ export default function AncestorsList() {
             <div>Pas d'ancêtre...</div>
           )}
         </div>
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            navigate("/ancestors/new");
+          }}
+        >
+          Créer un nouvel ancêtre
+        </button>
       </div>
     </>
   );

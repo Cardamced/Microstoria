@@ -1,0 +1,12 @@
+.dropzone {
+  background: transparent;
+  /* display: flex; */
+  /* flex-direction: column; */
+  border: 4px dotted lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  width: 80px;
+  height: auto;
+}

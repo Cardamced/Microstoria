@@ -1,8 +1,9 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import AncestorsList from "./AncestorsList";
 import AncestorView from "./AncestorView";
+import AncestorNewForm from "./ancestors/AddAncestor/AncestorNewForm";
 import App from "./App";
+import SingleFileUploader from "./components/SingleFileUploader/SingleFileUploader";
 
 const router = createBrowserRouter([
   {
@@ -11,12 +12,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/ancestors",
-    element: <AncestorsList />,
+    element: <AncestorsList id={0} />,
   },
   {
     path: "/ancestors/:id",
-    element: <AncestorView />,
-  }
+    element: <AncestorView ancestorId={0} />,
+  },
+  {
+    path: "/ancestors/new",
+    element: <AncestorNewForm />,
+  },
 ]);
 
 export default router;
