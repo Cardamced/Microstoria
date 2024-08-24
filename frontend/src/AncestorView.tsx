@@ -4,7 +4,7 @@ import { getAncestorsById } from "./api-fetch-ancestors";
 import { AncestorResponse } from "./types/types";
 import AncestorCard from "./AncestorCard";
 import "./AncestorView.css";
-import AncestorDeletion from "./AncestorDeletion";
+import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
 
 export default function AncestorView({ ancestorId }: { ancestorId: number }) {
   const { id } = useParams<{ id: string }>();

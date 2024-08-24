@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import AncestorsList from "./AncestorsList";
 import AncestorView from "./AncestorView";
-import AncestorNewForm from "./AncestorNewForm";
+import AncestorNewForm from "./ancestors/AddAncestor/AncestorNewForm";
 import App from "./App";
-import SingleFileUploader from "./components/SingleFileUploader";
+import SingleFileUploader from "./components/SingleFileUploader/SingleFileUploader";
 
 const router = createBrowserRouter([
   {

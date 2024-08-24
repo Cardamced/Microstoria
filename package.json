@@ -26,6 +26,7 @@
     "date-fns": "^3.6.0",
     "react-datepicker": "^7.3.0",
     "react-day-picker": "^9.0.8",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.52.2"
   }
 }

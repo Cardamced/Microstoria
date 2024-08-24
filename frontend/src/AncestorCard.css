@@ -21,6 +21,16 @@
     margin: 0;
 }
 
+.card-header {
+    margin: 10px;
+}
+
+.portrait {
+
+    justify-content: center;
+
+}
+
 img {
     height: 80px;
     width: 80px
@@ -83,3 +93,5 @@ img {
     background: linear-gradient(to bottom, #f5f5f5, rgba(245, 245, 245, 0));
     pointer-events: none;
 } */
+
+

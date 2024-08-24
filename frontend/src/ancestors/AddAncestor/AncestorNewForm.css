@@ -1,5 +1,22 @@
+/*Style desktop*/
+
+/* TODO : Prévoir style mobile : en-dessous de 768px, par exemple, les labels des champs passent au-dessus des champs.*/
+/*NB : La dropzone se réduit automatiquement*/
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0.438);
+    color: var(--primary-dark-blue);
+    border: 4px solid var(--primary-dark-blue);
+    border-radius: 15px;
+}
+
 form {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     background-color: beige;
     align-items: center;
@@ -7,19 +24,41 @@ form {
     padding: 5px;
     border: 4px solid var(--primary-dark-blue);
     border-radius: 15px;
-    width: 40%;
+    width: 50%;
+    height: auto;
 }
 
 .input-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* "Column" Pour que les éléments soient alignés verticalement ; à conserver pour le mode mobile */
     align-items: center;
     justify-content: space-between;
     width: 100%;
     /* Pour que les éléments occupent toute la largeur du form */
-    max-width: 380px;
+    max-width: 480px;
     /* Ajustez selon vos besoins */
     margin-bottom: 5px;
+}
+
+.input-container-image {
+    width: 100%;
+    max-width: 480px;
+    flex-direction: row;
+    background: white;
+    padding: 5px;
+    justify-items: space-between;
+    /* margin-left: 5px; */
+}
+
+.image {
+    display: flex;
+    background: blue;
+    width: auto;
+    height: 30px;
+    text-decoration: underline;
+    color: white;
+    /* border-radius: 50%; */
+    margin: 5px;
 }
 
 .input-style,

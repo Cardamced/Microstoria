@@ -42,74 +42,76 @@ const AncestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
 
   return (
     <div className="card" onClick={onClick}>
-      <div>
+      <div className="card-header">
         <h2>
           {ancestor.firstname} {ancestor.lastname}
         </h2>
-        <div>
+        <div className="portrait">
           <img
             src={
               ancestor.image
                 ? ancestor.image
                 : getPlaceholderImage(ancestor.gender)
             }
-            alt="photo d'ancêtre"
+            alt="Portrait d'ancêtre"
           />
-          <p className="styled-fonts" data-label="Sexe :">
-            {ancestor.gender === "male"
-              ? " Homme"
-              : ancestor.gender === "female"
-              ? " Femme"
-              : " Inconnu"}
-          </p>
-          <p className="styled-fonts" data-label="Date de naissance :">
-            {" "}
-            {ancestor.birthdate ? formatDate(ancestor.birthdate) : " - "}
-          </p>
-          <p className="styled-fonts" data-label="Lieu de naissance :">
-            {" "}
-            {ancestor.birth_place ? ancestor.birth_place : " - "}
-          </p>
-          <p className="styled-fonts" data-label="Date de mariage :">
-            {ancestor.wedding_date ? formatDate(ancestor.wedding_date) : " - "}
-          </p>
-          <p className="styled-fonts" data-label="Lieu de mariage :">
-            {" "}
-            {ancestor.wedding_place ? ancestor.wedding_place : " - "}
-          </p>
-          <p className="styled-fonts" data-label="Date de décès :">
-            {" "}
-            {ancestor.death_date ? formatDate(ancestor.death_date) : " - "}
-          </p>
-          <p className="styled-fonts" data-label="Lieu de décès :">
-            {" "}
-            {ancestor.death_place ? ancestor.death_place : " - "}
-          </p>
-          <p
-            ref={occupationRef}
-            className={`styled-fonts ${isExpanded ? "expanded" : ""}`}
-            data-label="Métier :"
-          >
-            {" "}
-            {ancestor.occupation ? ancestor.occupation : " - "}
-            {shouldShowButton && (
-              <button
-                className="read-more-btn"
-                onClick={(e) => {
-                  e.stopPropagation(); // Empêche le clic de propager à la carte
-                  setIsExpanded(!isExpanded);
-                }}
-                aria-label={isExpanded ? "Réduire" : "En lire plus"}
-              >
-                {isExpanded ? "▲" : "▼"}
-              </button>
-            )}
-          </p>
-          <p className="styled-fonts" data-label="Sosa :">
+        </div>
+        <p className="styled-fonts" data-label="Sexe :">
+          {ancestor.gender === "male"
+            ? " Homme"
+            : ancestor.gender === "female"
+            ? " Femme"
+            : " Inconnu"}
+        </p>
+        <p className="styled-fonts" data-label="Date de naissance :">
+          {" "}
+          {ancestor.birthdate ? formatDate(ancestor.birthdate) : " - "}
+        </p>
+        <p className="styled-fonts" data-label="Lieu de naissance :">
+          {" "}
+          {ancestor.birth_place ? ancestor.birth_place : " - "}
+        </p>
+        <p className="styled-fonts" data-label="Date de mariage :">
+          {ancestor.wedding_date ? formatDate(ancestor.wedding_date) : " - "}
+        </p>
+        <p className="styled-fonts" data-label="Lieu de mariage :">
+          {" "}
+          {ancestor.wedding_place ? ancestor.wedding_place : " - "}
+        </p>
+        <p className="styled-fonts" data-label="Date de décès :">
+          {" "}
+          {ancestor.death_date ? formatDate(ancestor.death_date) : " - "}
+        </p>
+        <p className="styled-fonts" data-label="Lieu de décès :">
+          {" "}
+          {ancestor.death_place ? ancestor.death_place : " - "}
+        </p>
+        <p
+          ref={occupationRef}
+          className={`styled-fonts ${isExpanded ? "expanded" : ""}`}
+          data-label="Métier :"
+        >
+          {" "}
+          {ancestor.occupation ? ancestor.occupation : " - "}
+          {shouldShowButton && (
+            <button
+              className="read-more-btn"
+              onClick={(e) => {
+                e.stopPropagation(); // Empêche le clic de propager à la carte
+                setIsExpanded(!isExpanded);
+              }}
+              aria-label={isExpanded ? "Réduire" : "En lire plus"}
+            >
+              {isExpanded ? "▲" : "▼"}
+            </button>
+          )}
+        </p>
+        {/* TODO : Ajouter le numéro de Sosa automatiquement en fonction du champ renseigné par la personne qui sera le sosa 1.
+          Prévoir le calcul s'il n'est pas déjà dans le script python ; intégrer champ */}
+        {/* <p className="styled-fonts" data-label="Sosa :">
             {" "}
             {ancestor.sosa ? ancestor.sosa : " - "}
-          </p>
-        </div>
+          </p> */}
       </div>
     </div>
   );

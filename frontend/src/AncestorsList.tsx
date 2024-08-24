@@ -4,7 +4,7 @@ import { getAncestors } from "./api-fetch-ancestors";
 import "./AncestorsList.css";
 import { AncestorsResponse } from "./types/types";
 import AncestorCard from "./AncestorCard";
-import AncestorDeletion from "./AncestorDeletion";
+import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
 
 export default function AncestorsList({ id }: { id: number }) {
   const [ancestors, setAncestors] = useState<AncestorsResponse | null>([]); // Utilisation de l'état pour stocker les ancêtres
