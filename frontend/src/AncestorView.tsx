@@ -1,7 +1,7 @@
 import react, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAncestorsById } from "./api-fetch-ancestors";
-import { AncestorResponse } from "./types/types";
+import { AncestorResponse } from "./../../shared/types/types";
 import AncestorCard from "./AncestorCard";
 import "./AncestorView.css";
 import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
@@ -48,10 +48,10 @@ export default function AncestorView({ ancestorId }: { ancestorId: number }) {
         <h1>Vue de l'ancêtre</h1>
         {ancestor ? (
           <div className="cards">
-            <AncestorCard ancestor={ancestor} onClick={handleButtonClick} />
+            <AncestorCard ancestor={ancestor} onClick={handleButtonClick} className={'ancestor-card'} />
           </div>
         ) : (
-          <div>Loading...</div>
+          <div>Chargement...</div>
         )}
         <button onClick={handleButtonClick}>
           <img

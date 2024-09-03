@@ -3,6 +3,9 @@
 .h1{
     display: flex;
     justify-content: center;
+    height: 100px;
+    width:auto;
+    background-color: green;
 }
 
 .cards {
@@ -28,10 +31,10 @@ button:hover {
 }
 
 .error {
-    height: 60px;
+    height: 80px;
     width: auto;
     background-color: rgba(255, 0, 0, 0.533);
-    border: 3px solid black;
+    border: 6px solid black;
     border-radius: 15px;
     align-content: center;
 }
