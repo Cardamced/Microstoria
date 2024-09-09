@@ -6,7 +6,7 @@ import SingleFileUploader from "../../components/SingleFileUploader/SingleFileUp
 import DatePicker from "react-datepicker";
 import { fr } from "date-fns/locale";
 import { format } from "date-fns";
-import { Ancestor } from "../../types/types";
+import { Ancestor } from "../../../../shared/types/types";
 import { Gender } from "../../../../backend/src/ancestors/ancestor.entity";
 import "./AncestorNewForm.css";
 import "react-datepicker/dist/react-datepicker.css";

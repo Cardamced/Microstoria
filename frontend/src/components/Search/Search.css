@@ -1,8 +1,8 @@
 .search-results {
     display: flex;
     flex-direction: column;
-    background: lightyellow;
-    border: 4px solid var(--primary-dark-green);
+    /* background: #FFF1C8; garder cette nuance pour les cards au hover */
+    /* border: 4px solid var(--primary-dark-green); */
     border-radius: 15px;
     height: auto;
     width: 100%;
@@ -11,17 +11,6 @@
     margin-top: 20px;
 }
 
-
-
-/* .search-results {
-    display: grid;
-    background: lightblue;
-    border: 4px solid var(--primary-dark-green);
-    border-radius: 15px;
-    height: auto;
-    width: 100%;
-    margin-top: 20px;
-} */
 
 /* .cards {
     display: grid;

@@ -8,35 +8,67 @@
     margin: 5px;
     padding: 15px !important;
     border: 4px solid white;
-    border-radius: 8px; /* réfléchir à une allure élégante de la card via des coins différents */
-    background-color: #f5f5f5;
+    border-radius: 8px;
+    /* réfléchir à une allure élégante de la card via des coins différents */
+    /* background-color: #f5f5f5; */
+    /* background-color: rgba(112, 0, 0, 0.05); */
+    background-color: rgba(104, 95, 95, 0.25);
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
     position: relative;
-    overflow: hidden; /* Cache les éléments qui débordent */
+    overflow: hidden;
+    /* Cache les éléments qui débordent */
+    transition: transform 0.5s;
+    /* Ajoute la transition pour l'état normal */
 }
 
-.h2 {
-    font-size: 1.5rem;
+h2 {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    padding-top: 10px;
+    font-size: 1.3rem;
     font-weight: bold;
-    color: rgba(4, 36, 2, 0.8);
+    background-color: rgba(112, 124, 97, 0.3);
+    background: linear-gradient(to top, transparent, rgba(112, 125, 97, 0.9));
     margin: 0;
+    border-radius: 0 0px 0 0;
+    /* border-right: 2px solid rgba(0, 0, 255, 0); */
+    z-index: 4;
+    /* transition: border-radius 0.2s ease-out, border-right 0.2s ease-out ; */
+    transition: border-radius 0.2s ease-out, border-right 0.2s ease-out;
+    /* Transition rapide pour le retour à l'état initial */
+    /* box-shadow: 0 0 0px 0px rgba(120, 120, 120, 0.1); */
+    border-left-color: 2px solid red;
+    border-top-color: 2px solid blue;
+}
+
+h2:hover {
+    border-radius: 0 55px 0 0;
+    /* transition: border-radius 0.5s ease-out, border-right 0.5s ease-out; */
+    box-shadow: 55px 0px 0px 0px rgba(120, 120, 120, 0.3);
+    transition: border-radius 0.25s ease-in, border-right 0.25s ease-in;
+    /* Transition lente pour box-shadow */
+    /* border-right: 2px solid var(--secondary-light); */
+    z-index: 1;
 }
 
 .card-header {
     position: relative;
     height: 100%;
     width: 100%;
-    margin: 2px;
+    background-color: transparent;
     align-self: center;
-    border: 1.5px solid var(--primary-dark-green);
-    border-radius: 3px;
+    border: 1.5px transparent solid;
+    border-radius: 5px;
+    overflow: hidden;
 }
+
 .card-header:hover::before {
     content: attr(data-label);
     color: blue;
     font-weight: bold;
     opacity: 10%;
-} 
+}
 
 .portrait {
     justify-content: center;
@@ -50,7 +82,7 @@ img {
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
 }
 
-.gender-symbol{
+.gender-symbol {
     position: absolute;
     top: 0;
     right: 0;
@@ -58,11 +90,20 @@ img {
     width: 20px;
     border: none;
     box-shadow: none;
+    color: blue;
+    opacity: 0;
+    transition: opacity 0.01s ease-in-out;
+    pointer-events: none; /*permet aux événements de souris de traverser le svg*/
+}
+
+h2:hover .gender-symbol {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .card:hover {
-    background-color: rgba(8, 46, 8, 0.2);
-    border: 4px solid var(--primary-light-blue);
+    background-color: rgba(230, 172, 133, 0.376);
+    border: 4px solid var(--secondary-light);
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transform: scale(103%);
@@ -72,15 +113,31 @@ img {
 .styled-fonts {
     display: flex;
     color: var(--primary-color);
-    font-size: 15Px;
+    font-size: 14px;
     max-height: 3rem; /* Hauteur maximum de 2 lignes */
-    overflow: hidden; /* Masque le texte qui dépasse */
+    max-width: 100%;
+    overflow: hidden;
     text-align: start;
+    position: relative;
+    border-top: 1px solid white;
+    padding-top: 8px;
+}
+
+.styled-fonts-data {
+    display: flex;
+    color: var(--primary-color);
+    font-size: 13px;
+    max-height: auto; /* Hauteur maximum de 2 lignes */
+    max-width: 100%;
+    overflow: hidden;
+    text-align: start;
+    padding-left: 10px; /* padding-bottom: 5px; */
     position: relative;
 }
 
 .read-more-btn {
-    display: block; /* Masqué par défaut */
+    display: block;
+    /* Masqué par défaut */
     background-color: var(--primary-dark-green);
     color: white;
     /* padding: 5px 10px; */
@@ -89,7 +146,8 @@ img {
     font-size: 14px;
     cursor: pointer;
     margin-top: 1px;
-    align-self: flex-start; /* Aligne le bouton à gauche */
+    align-self: flex-start;
+    /* Aligne le bouton à gauche */
 }
 
 /* .card:hover .read-more-btn {
@@ -97,7 +155,8 @@ img {
  } /* Affiche le bouton au survol */
 
 .styled-fonts.expanded {
-    max-height: 100em; /* Suffisamment grand pour inclure tout le texte */
+    max-height: 100em;
+    /* Suffisamment grand pour inclure tout le texte */
 }
 
 .styled-fonts::before {
@@ -106,17 +165,3 @@ img {
     font-weight: bold;
     margin-right: 2.5rem;
 }
-
-/* .styled-fonts::after {
-    content: '';
-    position: absolute;
-    border: 1px solid blue;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background: linear-gradient(to bottom, #f5f5f5, rgba(245, 245, 245, 0));
-    pointer-events: none;
-} */
-
-

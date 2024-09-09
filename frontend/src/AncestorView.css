@@ -1,11 +1,13 @@
 /* Style de la page d'affichage Ancêtre / events / sources */
 
-.h1{
+h1{
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 100px;
     width:auto;
     background-color: green;
+    border: 6px solid black;
 }
 
 .cards {

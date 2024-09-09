@@ -15,18 +15,18 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
   const [shouldShowButton, setShouldShowButton] = useState<boolean>(false);
   const occupationRef = useRef<HTMLDivElement>(null);
   const letterMonth = [
-    "jan",
-    "fev",
-    "mar",
-    "avr",
+    "janv.",
+    "févr.",
+    "mars",
+    "avr.",
     "mai",
     "juin",
-    "juil",
-    "aou",
-    "sep",
-    "oct",
-    "nov",
-    "dec",
+    "juill.",
+    "août",
+    "sept.",
+    "oct.",
+    "nov.",
+    "déc.",
   ];
 
   useEffect(() => {
@@ -62,14 +62,15 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
   return (
     <div className="card" onClick={onClick}>
       <div className="card-header">
+        <h2>
+          <div className="folded-corner-top-left"></div>
         {ancestor.gender === "male" ? (
-          <img src="./manSym.png" alt="Homme" className="gender-symbol" />
+          <img src="./manSym.svg" alt="Homme" className="gender-symbol" />
         ) : ancestor.gender === "female" ? (
-          <img src="./womSym.png" alt="Homme" className="gender-symbol" />
+          <img src="./womSym.svg" alt="femme" className="gender-symbol" />
         ) : (
           ""
         )}
-        <h2>
           {ancestor.firstname} {ancestor.lastname}
         </h2>
         <div className="portrait">
@@ -83,19 +84,19 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
           />
         </div>
         <p className="styled-fonts" data-label="Naissance"></p>
-        <p className="styled-fonts">
+        <p className="styled-fonts-data">
           {ancestor.birthdate ? "le " + formatDate(ancestor.birthdate) : " - "}{" "}
           {ancestor.birth_place ? " à " + ancestor.birth_place : " - "}
         </p>
         <p className="styled-fonts" data-label="Mariage"></p>
-        <p className="styled-fonts">
+        <p className="styled-fonts-data">
           {ancestor.wedding_date
             ? "le " + formatDate(ancestor.wedding_date)
             : " - "}{" "}
           {ancestor.wedding_place ? " à " + ancestor.wedding_place : " - "}
         </p>
         <p className="styled-fonts" data-label="Décès"></p>
-        <p className="styled-fonts">
+        <p className="styled-fonts-data">
           {ancestor.death_date
             ? "le " + formatDate(ancestor.death_date)
             : " - "}

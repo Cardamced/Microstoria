@@ -1,0 +1,45 @@
+.navbar-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    justify-items: space-evenly;
+    height: 65px;
+    width: 100%;
+    list-style: none; /* Supprimer les puces de la liste */
+    padding: 0; /* Supprimer le padding par défaut de la liste */
+    margin: 0; /* Supprimer la marge par défaut de la liste */
+    display: flex; /* Utiliser flexbox pour aligner horizontalement */
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0.753);
+    border-bottom: 3px solid var(--primary-dark-blue); /* Ligne de séparation en bas de la navbar */
+    border-radius: 0;
+    z-index: 10;
+}
+
+.nav-item {
+    margin-inline: 30px;
+    /* Espacement entre les éléments de la navbar */
+    /* scroll-behavior: smooth; */
+    width: 180px;
+    justify-content: center;
+    background-color: #f0ead6;
+    border: 1px solid var(--primary-dark-blue);
+}
+
+.nav-item:hover {
+    background-color: #f0ead6a8;
+}
+
+.nav-item a {
+    text-decoration: none;
+    /* Supprimer le soulignement par défaut des liens */
+    color: var(--primary-dark-blue);
+    /* Couleur du texte des liens */
+    font-size: 20px;
+    padding: 5px;
+    /* Espacement intérieur des liens */
+    /* background-color: orange; */
+    transition: color 0.3s ease;
+    /* Transition douce pour les changements de couleur */
+}

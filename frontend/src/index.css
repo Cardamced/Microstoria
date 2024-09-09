@@ -6,6 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  /* background-color: #f0ead6a8; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,7 +15,7 @@
 
   --primary-dark-green: rgba(4, 36, 2, 0.8);
   --primary-dark-blue: #1c2d3cf8;
-  --primary-light-blue: rgba(4, 4, 91, 0.474);
+  --primary-light-blue: rgba(4, 4, 91, 0.228);
   --secondary-dark: rgba(19, 11, 0, 0.85);
   --secondary-light: rgba(89, 52, 4, 0.535);
 }
@@ -34,6 +35,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* background-color: #f0ead6a8; */
+  background-color: #ffefbb58;
 }
 
 h1 {

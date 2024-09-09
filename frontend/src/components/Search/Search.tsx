@@ -12,7 +12,7 @@ interface Ancestor {
 }
 
 interface SearchProps {
-  searchValues: { firstname: string; lastname: string; birthdate: string; deathDate: string };
+  searchValues: { firstname: string; lastname: string; birthdate: string; birthdateStart: string; birthdateEnd: string; deathDate: string };
 }
 
 export default function Search({ searchValues }: SearchProps) {
@@ -76,7 +76,7 @@ export default function Search({ searchValues }: SearchProps) {
               key={ancestor.id}
               ancestor={ancestor}
               className={cardClass}
-              onClick={() => console.log(`Clicked on ${ancestor.firstname} ${ancestor.lastname}`)}
+              onClick={() => console.log(`Clicked on ${ancestor.firstname} ${ancestor.lastname}`, navigate(`/ancestors/${ancestor.id}`))}
             />
           );
         })}
