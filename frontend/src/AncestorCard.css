@@ -38,8 +38,6 @@ h2 {
     transition: border-radius 0.2s ease-out, border-right 0.2s ease-out;
     /* Transition rapide pour le retour à l'état initial */
     /* box-shadow: 0 0 0px 0px rgba(120, 120, 120, 0.1); */
-    border-left-color: 2px solid red;
-    border-top-color: 2px solid blue;
 }
 
 h2:hover {

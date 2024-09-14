@@ -45,20 +45,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
 
   return (
     <div className={`navbar ${hidden ? "hidden" : ""}`}>
-      <img
-        src="../LogoTest2.png"
-        alt="Logo"
-        className="logo"
-        onClick={() => navigate("/home")}
-      />
-      <button className="search-selector" onClick={toggleSearchMode}>
-        {isAdvancedSearch ? "Recherche simple" : "Recherche avancée"}
-      </button>
-      {isAdvancedSearch ? (
-        <SearchBar onSearch={onSearch} />
-      ) : (
-        <SimpleSearchBar onSearch={onSearch} />
-      )}
       <nav className="navbar-list">
         <li className="nav-item">
           <Link to="/">Entrée</Link>
@@ -76,6 +62,20 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
         {/* <li className="nav-item">
           <Link to="/families">Familles</Link>
         </li> */}
+      <img
+        src="../LogoTest2.png"
+        alt="Logo"
+        className="logo"
+        onClick={() => navigate("/home")}
+        />
+      <button className="search-selector" onClick={toggleSearchMode}>
+        {isAdvancedSearch ? "Recherche simple" : "Recherche avancée"}
+      </button>
+      {isAdvancedSearch ? (
+        <SearchBar onSearch={onSearch} />
+      ) : (
+        <SimpleSearchBar onSearch={onSearch} />
+      )}
       </nav>
     </div>
   );

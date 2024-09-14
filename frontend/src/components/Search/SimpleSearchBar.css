@@ -32,9 +32,22 @@
     height: auto;
     margin: 3px;
     padding: 10px;
-    border: 1px solid transparent;
     border-radius: 5px;
+    background-color: white;
     border: 1px solid var(--primary-dark-blue);
+    z-index: 6;
+}
+.simple-search-button:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 3px;
+    padding: 10px;
+    border: 1px solid var(--primary-dark-blue);
+    background-color: #f0ead6;
+    border-radius: 5px;
     z-index: 6;
 }
 
