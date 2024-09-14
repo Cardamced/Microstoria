@@ -5,7 +5,7 @@ export default function App() {
   // TODO : onclick sur la page pour aller sur la homepage.
   return (
     <>
-      <h1 className="HomeStyle">Microstoria</h1>
+      <img src="./LogoTest.png" alt="Logo" className="main-logo"/>
     </>
   );
 }

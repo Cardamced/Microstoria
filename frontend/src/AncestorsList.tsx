@@ -5,6 +5,7 @@ import "./AncestorsList.css";
 import { AncestorsResponse } from "./../../shared/types/types";
 import AncestorCard from "./AncestorCard";
 import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
+import ScrollToTopButton from "./components/Buttons/ScrollToTopButton";
 
 export default function AncestorsList({ id }: { id: number }) {
   const [ancestors, setAncestors] = useState<AncestorsResponse | null>([]); // Utilisation de l'état pour stocker les ancêtres
@@ -65,6 +66,7 @@ export default function AncestorsList({ id }: { id: number }) {
           Créer un nouvel ancêtre
         </button>
       </div>
+      <ScrollToTopButton />
     </>
   );
 }

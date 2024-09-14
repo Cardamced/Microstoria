@@ -1,0 +1,55 @@
+.simple-search-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* justify-items: space-around; */
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    padding: 4px;
+    border: 2px solid gray;
+    background-color: transparent;
+}
+
+.simple-search-input {
+    width: 250px;
+    height: 30px;
+    border: 1px solid var(--primary-dark-blue);
+    border-radius: 5px;
+    padding: 5px;
+    gap: 5px;
+    background-color: #f0ead6;
+    z-index: 6;
+    /* outline: none; */
+}
+
+.simple-search-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 3px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    border: 1px solid var(--primary-dark-blue);
+    z-index: 6;
+}
+
+/* .search-button:hover {
+    border: 1px solid black;
+} */
+
+.champ-et-loupe-container {
+    position: absolute;
+    top: 2px;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    /* justify-items: space-around; */
+    z-index: 6;
+    width: 25%;
+    border: 2px solid orange;
+}

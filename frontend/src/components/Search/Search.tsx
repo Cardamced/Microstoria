@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import AncestorCard from "./../../AncestorCard";
 import "./Search.css";
@@ -12,16 +12,30 @@ interface Ancestor {
 }
 
 interface SearchProps {
-  searchValues: { firstname: string; lastname: string; birthdate: string; birthdateStart: string; birthdateEnd: string; deathDate: string };
+  searchValues: {
+    firstname: string;
+    lastname: string;
+    birthdate?: string;
+    birthdateStart?: string;
+    birthdateEnd?: string;
+    deathDate?: string;
+  };
 }
 
 export default function Search({ searchValues }: SearchProps) {
   const [ancestors, setAncestors] = useState<Ancestor[]>([]);
   const [filteredAncestors, setFilteredAncestors] = useState<Ancestor[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [resultsPerPage, setResultsPerPage] = useState(12);
   const navigate = useNavigate();
-  
+
   const handleButtonClick = () => {
     navigate("/ancestors");
+  };
+
+  // Pagination des résultats d'affichage des ancêtres.
+  const handleResultsPerPageChange = (event: any) => {
+    setResultsPerPage(parseInt(event.target.value));
   };
 
   useEffect(() => {
@@ -42,24 +56,86 @@ export default function Search({ searchValues }: SearchProps) {
   }, []);
 
   useEffect(() => {
-    console.log('searchValues:', searchValues); // Ajoutez ce log pour vérifier les valeurs de recherche
+    console.log("searchValues:", searchValues); // Log de vérification des valeurs de recherche
     const filtered = ancestors.filter((ancestor: Ancestor) => {
-      const firstnameMatch = ancestor.firstname.toLowerCase().includes(searchValues.firstname.toLowerCase());
-      const lastnameMatch = ancestor.lastname.toLowerCase().includes(searchValues.lastname.toLowerCase());
-      const birthdateMatch = searchValues.birthdate ? new Date(ancestor.birthdate).toISOString().split('T')[0] === searchValues.birthdate : true;
-      const deathDateMatch = searchValues.deathDate ? new Date(ancestor.death_date).toISOString().split('T')[0] === searchValues.deathDate : true;
-      return firstnameMatch && lastnameMatch && birthdateMatch && deathDateMatch;
+      const firstnameMatch = ancestor.firstname
+        .toLowerCase()
+        .includes(searchValues.firstname.toLowerCase());
+      const lastnameMatch = ancestor.lastname
+        .toLowerCase()
+        .includes(searchValues.lastname.toLowerCase());
+      const birthdateMatch = searchValues.birthdate
+        ? new Date(ancestor.birthdate).toISOString().split("T")[0] ===
+          searchValues.birthdate
+        : true;
+      const deathDateMatch = searchValues.deathDate
+        ? new Date(ancestor.death_date).toISOString().split("T")[0] ===
+          searchValues.deathDate
+        : true;
+      return (
+        firstnameMatch && lastnameMatch && birthdateMatch && deathDateMatch
+      );
     });
-    console.log('Filtered ancestors:', filtered); // Ajoutez ce log pour vérifier les ancêtres filtrés
+    console.log("Filtered ancestors:", filtered); // Ajoutez ce log pour vérifier les ancêtres filtrés
     setFilteredAncestors(filtered);
   }, [searchValues, ancestors]);
 
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const paginatedAncestors = filteredAncestors.slice(
+    (currentPage - 1) * resultsPerPage,
+    currentPage * resultsPerPage
+  );
+
+  const totalPages = Math.ceil(filteredAncestors.length / resultsPerPage);
+
+  console.log("paginated", paginatedAncestors);
+  console.log("paginated", currentPage);
+  console.log("nombre de pages", totalPages);
+
   return (
     <div className="search-results">
-      <h1>{`${filteredAncestors.length} résultat${filteredAncestors.length > 1 ? "s" : ""} pour "${searchValues.firstname} ${searchValues.lastname}"`}</h1>
+      <div className="results-specs">
+        <h3>
+          {`${filteredAncestors.length} résultat${
+            filteredAncestors.length > 1 ? "s" : ""
+          }`}
+        </h3>
+        <select
+          value={resultsPerPage}
+          onChange={handleResultsPerPageChange}
+          className="pagination-select"
+        >
+          <option value="12">12 résultats par page</option>
+          <option value="24">24 résultats par page</option>
+          <option value="48">48 résultats par page</option>
+          <option value="100">100 résultats par page</option>
+        </select>
+      </div>
+      <div className="pagination-block">
+        {currentPage > 0 && (
+          <>
+            {currentPage > 1 && (
+              <button onClick={() => handlePageChange(currentPage - 1)}>
+                Précédent
+              </button>
+            )}
+            <span>
+              Page {`${currentPage}`} - {`${totalPages}`}{" "}
+            </span>
+            {currentPage < totalPages && (
+              <button onClick={() => handlePageChange(currentPage + 1)}>
+                Suivant
+              </button>
+            )}
+          </>
+        )}
+      </div>
       {/*Travailler le H1 pour ne pas avoir les guillemets quand il n'y a pas de recherche initiale*/}
       <div className="results-grid">
-        {filteredAncestors.map((ancestor) => {
+        {paginatedAncestors.map((ancestor) => {
           const isFirstnameMatch: boolean = ancestor.firstname
             .toLowerCase()
             .includes(searchValues.firstname.toLowerCase());
@@ -76,7 +152,12 @@ export default function Search({ searchValues }: SearchProps) {
               key={ancestor.id}
               ancestor={ancestor}
               className={cardClass}
-              onClick={() => console.log(`Clicked on ${ancestor.firstname} ${ancestor.lastname}`, navigate(`/ancestors/${ancestor.id}`))}
+              onClick={() =>
+                console.log(
+                  `Clicked on ${ancestor.firstname} ${ancestor.lastname}`,
+                  navigate(`/ancestors/${ancestor.id}`)
+                )
+              }
             />
           );
         })}

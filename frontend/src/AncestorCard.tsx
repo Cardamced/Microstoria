@@ -73,7 +73,7 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
         )}
           {ancestor.firstname} {ancestor.lastname}
         </h2>
-        <div className="portrait">
+        <div className="portrait-container">
           <img
             src={
               ancestor.image
@@ -81,6 +81,7 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
                 : getPlaceholderImage(ancestor.gender || null)
             }
             alt="Portrait d'ancêtre"
+            className="portrait"
           />
         </div>
         <p className="styled-fonts" data-label="Naissance"></p>

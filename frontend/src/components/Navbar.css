@@ -1,24 +1,94 @@
-.navbar-list {
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 0;
+    transition: padding 0.3s, background-color 0.3s;
+    z-index: 1000;
+}
+
+.navbar.hidden {
+    top: -10%;
+    transition: transform 0.3s, top 0.3s;
+
+}
+
+.nav-container {
+    /* height: 75px; */
+    height: 8%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    transition: top 0.5s, background-color 0.5s;
+    color: white;
+}
+
+.nav-container.hidden {
+    top: -8%;
+}
+
+/* .nav-container-2 {
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    transition: top 0.5s, background-color 0.5s;
+    color: white;
+} */
+
+/* .nav-container.hidden
+.nav-container-2.hidden {
+    display: none;
+} */
+
+
+.logo {
+    position: absolute;
+    top: 2px;
+    left: 10px;
+    width: 70px;
+    height: auto;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+/*Contenu immuable de la navbar : onglets qui doivent rester fixed à droite*/
+.navbar-list {
+    display: fixed;
+    top: 110px;
+    right: 50px;
+    height: 100%;
+    justify-content: end;
+    align-items: center;
     z-index: 2;
     justify-items: space-evenly;
-    height: 65px;
-    width: 100%;
-    list-style: none; /* Supprimer les puces de la liste */
-    padding: 0; /* Supprimer le padding par défaut de la liste */
-    margin: 0; /* Supprimer la marge par défaut de la liste */
-    display: flex; /* Utiliser flexbox pour aligner horizontalement */
+    list-style: none;
+    /* Supprimer les puces de la liste */
+    padding: 0;
+    /* Supprimer le padding par défaut de la liste */
+    margin: 0;
+    /* Supprimer la marge par défaut de la liste */
+    display: flex;
+    /* Utiliser flexbox pour aligner horizontalement */
     flex-direction: row;
-    background-color: rgba(0, 0, 0, 0.753);
-    border-bottom: 3px solid var(--primary-dark-blue); /* Ligne de séparation en bas de la navbar */
+    /* background-color: rgba(0, 0, 0, 0.753); */
+    background-color: rgba(112, 120, 120, 0.225);
+    border-bottom: 2px solid var(--primary-dark-blue);
+    /* Ligne de séparation en bas de la navbar */
     border-radius: 0;
     z-index: 10;
 }
 
 .nav-item {
-    margin-inline: 30px;
+    margin-inline: 10px;
     /* Espacement entre les éléments de la navbar */
     /* scroll-behavior: smooth; */
     width: 180px;
@@ -42,4 +112,38 @@
     /* background-color: orange; */
     transition: color 0.3s ease;
     /* Transition douce pour les changements de couleur */
+}
+
+.simple-searchbar {
+    display: flex;
+    position: absolute;
+    top: 8px;
+    left: 2%;
+    border: 2px solid red;
+    z-index: 30;
+}
+
+.advanced-searchbar {
+    top: 8px;
+    left: 50%;
+    border: 2px solid purple;
+}
+
+/*Bouton de sélection de la rechercher simple ou avancée*/
+.search-selector {
+    position: fixed;
+    background-color: white;
+    top: 25px;
+    left: 650px;
+    border: 1px solid green;
+    z-index: 5;
+} */
+
+.search-selector:hover {
+    position: fixed;
+    background-color: white;
+    top: 15px;
+    left: 650px;
+    border: 1px solid black;
+    z-index: 6;
 }
