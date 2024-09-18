@@ -5,7 +5,7 @@
     width: 100%;
     height: 10%;
     background-color: #333;
-    border-bottom: 12px solid red;
+    /* border-bottom: 12px solid red; */
     color: white;
     padding: 0;
     transition: background-color 0.8s, top 0.5s;

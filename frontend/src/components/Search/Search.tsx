@@ -19,6 +19,8 @@ interface SearchProps {
     birthdateStart?: string;
     birthdateEnd?: string;
     deathDate?: string;
+    deathDateStart?: string;
+    deathDateEnd?: string;
   };
 }
 
@@ -56,28 +58,64 @@ export default function Search({ searchValues }: SearchProps) {
   }, []);
 
   useEffect(() => {
-    console.log("searchValues:", searchValues); // Log de vérification des valeurs de recherche
-    const filtered = ancestors.filter((ancestor: Ancestor) => {
-      const firstnameMatch = ancestor.firstname
-        .toLowerCase()
-        .includes(searchValues.firstname.toLowerCase());
-      const lastnameMatch = ancestor.lastname
-        .toLowerCase()
-        .includes(searchValues.lastname.toLowerCase());
-      const birthdateMatch = searchValues.birthdate
-        ? new Date(ancestor.birthdate).toISOString().split("T")[0] ===
-          searchValues.birthdate
-        : true;
-      const deathDateMatch = searchValues.deathDate
-        ? new Date(ancestor.death_date).toISOString().split("T")[0] ===
-          searchValues.deathDate
-        : true;
-      return (
-        firstnameMatch && lastnameMatch && birthdateMatch && deathDateMatch
-      );
-    });
-    console.log("Filtered ancestors:", filtered); // Ajoutez ce log pour vérifier les ancêtres filtrés
-    setFilteredAncestors(filtered);
+    if (
+      searchValues.firstname ||
+      searchValues.lastname ||
+      searchValues.birthdate ||
+      searchValues.birthdateStart ||
+      searchValues.birthdateEnd ||
+      searchValues.deathDate ||
+      searchValues.deathDateStart ||
+      searchValues.deathDateEnd
+    ) {
+      console.log("searchValues:", searchValues); // Log de vérification des valeurs de recherche
+      const filtered = ancestors.filter((ancestor: Ancestor) => {
+        const firstnameMatch = ancestor.firstname
+          .toLowerCase()
+          .includes(searchValues.firstname.toLowerCase());
+        const lastnameMatch = ancestor.lastname
+          .toLowerCase()
+          .includes(searchValues.lastname.toLowerCase());
+        const birthdateMatch = searchValues.birthdate
+          ? new Date(ancestor.birthdate).toISOString().split("T")[0] ===
+            searchValues.birthdate
+          : true;
+        const birthdateStartMatch = searchValues.birthdateStart
+          ? new Date(ancestor.birthdate).getFullYear() >=
+            parseInt(searchValues.birthdateStart)
+          : true;
+        const birthdateEndMatch = searchValues.birthdateEnd
+          ? new Date(ancestor.birthdate).getFullYear() <=
+            parseInt(searchValues.birthdateEnd)
+          : true;
+        const deathDateMatch = searchValues.deathDate
+          ? new Date(ancestor.death_date).toISOString().split("T")[0] ===
+            searchValues.deathDate
+          : true;
+          const deathDateStartMatch = searchValues.deathDateStart
+          ? new Date(ancestor.death_date).getFullYear() >=
+            parseInt(searchValues.deathDateStart)
+          : true;
+        const deathDateEndMatch = searchValues.deathDateEnd
+          ? new Date(ancestor.death_date).getFullYear() <=
+            parseInt(searchValues.deathDateEnd)
+          : true;
+        return (
+          firstnameMatch &&
+          lastnameMatch &&
+          birthdateMatch &&
+          birthdateStartMatch &&
+          birthdateEndMatch &&
+          deathDateMatch &&
+          deathDateStartMatch &&
+          deathDateEndMatch
+        );
+      });
+      console.log("Filtered ancestors:", filtered); // Ajoutez ce log pour vérifier les ancêtres filtrés
+      setFilteredAncestors(filtered);
+    } else {
+      setFilteredAncestors([]);
+    }
   }, [searchValues, ancestors]);
 
   const handlePageChange = (pageNumber: number) => {
@@ -99,9 +137,11 @@ export default function Search({ searchValues }: SearchProps) {
     <div className="search-results">
       <div className="results-specs">
         <h3>
-          {`${filteredAncestors.length} résultat${
-            filteredAncestors.length > 1 ? "s" : ""
-          }`}
+          {filteredAncestors.length === 0
+            ? "Aucun résultat"
+            : `${filteredAncestors.length} résultat${
+                filteredAncestors.length > 1 ? "s" : ""
+              }`}
         </h3>
         <select
           value={resultsPerPage}
@@ -125,7 +165,7 @@ export default function Search({ searchValues }: SearchProps) {
             <span>
               Page {`${currentPage}`} - {`${totalPages}`}{" "}
             </span>
-            {currentPage < totalPages && (
+            {currentPage > 0 && currentPage < totalPages && (
               <button onClick={() => handlePageChange(currentPage + 1)}>
                 Suivant
               </button>

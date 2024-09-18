@@ -1,23 +1,60 @@
+@keyframes slideIn {
+    4% {
+        transform: translateX(-100%);
+    }
+
+    /* 50% {
+        transform: translateX(-50%);
+    } */
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    4% {
+        transform: translateX(0);
+    }
+
+    /* 50% {
+        transform: translateX(-50%);
+    } */
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
 .search-bar-test {
     position: absolute;
     top: 100%;
-    left: 5%;
+    left: 1%;
     display: flex;
     flex-direction: row;
     background-color: rgba(8, 38, 2, 0.278);
     border: 2px solid var(--primary-dark-blue);
     border-radius: 5px;
     backdrop-filter: blur(10px);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Ajout de l'ombre portée */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     height: auto;
     width: 60%;
     align-items: center;
     margin-top: 20px;
     padding: 5px;
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(0);
 }
 
 .search-bar-test.hidden {
-    display: none;
+    /* display: none; */
+    position: absolute;
+    top: 100%;
+    left: 4%;
+    animation: slideOut .9s forwards ease-in-out;
+}
+
+.search-bar-test:not(.hidden) {
+    animation: slideIn 0.4s forwards ease-in-out;
 }
 
 .form-style {
@@ -31,11 +68,15 @@
     border-radius: 5px;
 }
 
-.search-input[type="range"] {
-    -webkit-appearance: none; /* Supprime le style par défaut de Webkit */
-    -moz-appearance: none; /* Supprime le style par défaut de Firefox */
-    appearance: none; /* Propriété standard. */
-    width: 100%;
+.search-input-range-birthdate[type="range"],
+.search-input-range-deathdate[type="range"] {
+    -webkit-appearance: none;
+    /* Supprime le style par défaut de Webkit */
+    -moz-appearance: none;
+    /* Supprime le style par défaut de Firefox */
+    appearance: none;
+    /* Propriété standard. */
+    width: 90%;
     height: 8px;
     background: #ddd;
     outline: none;
@@ -43,8 +84,10 @@
     transition: opacity 0.2s;
 }
 
-.search-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Supprime le style par défaut de Webkit */
+.search-input-range-birthdate[type="range"]::-webkit-slider-thumb,
+.search-input-range-deathdate[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Supprime le style par défaut de Webkit */
     appearance: none;
     width: 20px;
     height: 20px;
@@ -53,16 +96,18 @@
     border-radius: 50%;
 }
 
-.search-input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+.search-input-range-birthdate[type="range"]::-moz-range-thumb,
+.search-input-range-deathdate[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
     background: #4CAF50;
     cursor: pointer;
     border-radius: 20%;
-    transform: skew(-30deg);
+    transform: skew(-25deg);
 }
 
-.search-input[type="range"]::-webkit-slider-runnable-track {
+.search-input-range-birthdate[type="range"]::-webkit-slider-runnable-track,
+.search-input-range-deathdate[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 8px;
     cursor: pointer;
@@ -70,7 +115,8 @@
     border-radius: 5px;
 }
 
-.search-input[type="range"]::-moz-range-track {
+.search-input-range-birthdate[type="range"]::-moz-range-track,
+.search-input-range-deathdate[type="range"]::-moz-range-track {
     width: 100%;
     height: 8px;
     cursor: pointer;
@@ -78,7 +124,8 @@
     border-radius: 5px;
 }
 
-.range-container {
+.range-container-birthdate,
+.range-container-deathdate {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -125,4 +172,24 @@
 .map {
     height: 100%;
     width: 100%;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.toggle-search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--primary-dark-blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.toggle-search-button:hover {
+    background-color: var(--primary-light-blue);
+    border: none
 }
