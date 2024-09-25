@@ -38,7 +38,7 @@ export default function AncestorView({ ancestorId }: { ancestorId: number }) {
     return <div className="error">Error: {error.message}</div>;
   }
 
-  // TODO : Créer la page d'affichage d'un ancêtre qui appelera :
+  // TODO : Créer la page d'affichage d'un ancêtre qui appellera :
   // - AncestorCard
   // - Sources
   // - Events

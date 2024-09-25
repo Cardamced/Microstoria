@@ -25,22 +25,28 @@
 }
 
 
-.search-bar-test {
+.search-bar-test { /* conteneur flou du formulaire avancé et de la carte */
     position: absolute;
-    top: 100%;
-    left: 1%;
+    top: 85%;
+    left: 2px;
     display: flex;
     flex-direction: row;
-    background-color: rgba(8, 38, 2, 0.278);
-    border: 2px solid var(--primary-dark-blue);
+    height: auto;
+    width: auto;
+    min-width: 1500px; /* Largeur minimale */
+    max-width: 100%; /* Largeur maximale */
+    max-height: 100vh; /* Hauteur maximale pour permettre le défilement */
+    /* overflow-y: auto; Ajout d'une barre de défilement verticale */
+    background-color: rgba(15, 38, 2, 0.106);
+    /* background-color: rgba(8, 38, 2, 0.278); */
+    border: 2px transparent;
+    /* border: 2px solid var(--primary-dark-blue); */
     border-radius: 5px;
     backdrop-filter: blur(10px);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-    height: auto;
-    width: 60%;
     align-items: center;
     margin-top: 20px;
-    padding: 5px;
+    padding: 0;
     transition: transform 0.5s ease-in-out;
     transform: translateX(0);
 }
@@ -59,15 +65,22 @@
 
 .form-style {
     display: flex;
-    background-color: pink;
+    flex-direction: column;
+    background-color: #f0ead6;
     height: auto;
-    width: 70%;
+    width: 320px;
+    padding: 15px;
     justify-content: center;
     align-items: center;
     justify-items: center;
     border-radius: 5px;
+    z-index: 2;
+    border: 2px solid var(--primary-dark-blue);
+    overflow-y: auto;
+    min-height: fit-content;
 }
 
+/*Jauges de réglage des intervalles de dates*/
 .search-input-range-birthdate[type="range"],
 .search-input-range-deathdate[type="range"] {
     -webkit-appearance: none;
@@ -169,12 +182,143 @@
     outline: none;
 }
 
-.map {
+.custom-birthdates-research,
+.custom-weddingdates-research,
+.custom-deathdates-research {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.custom-birthdates-research.hidden,
+.custom-weddingdates-research.hidden,
+.custom-deathdates-research.hidden {
+    display: none;
+}
+
+.close-modale-recherche {
+    position: absolute;
+    top: -10px;
+    right: -45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border: 2px solid var(--primary-dark-blue);
+    border-radius: 50%;
+    color: black;
+    cursor: pointer;
+}
+
+.close-modale-recherche:hover {
+    background-color: var(--primary-dark-blue);
+    color: white;
+}
+
+.coucou-birthdates,
+.coucou-weddingdates {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+    /* border: 1px solid red; */
+}
+
+.coucou-birthdates > .range-container-birthdate,
+.coucou-weddingdates > .range-container-weddingdate {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: fit-content;
+    /* background-color: yellow; */
+    margin-bottom: 5px;
+}
+
+.date-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    /* border: 3px solid darkgreen; */
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+/*Prévoir espacement différent entre sélecteur et bornes*/
+
+.bornes-dates {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    border-radius: 5px;
+    margin: none;
+    gap: 10px;
+}
+
+.select-siècle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    border: 1px solid darkgreen;
+    /* margin: 15px; */
+    border-radius: 5px;
+    gap: 10px;
+}
+
+.range-années {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    border: 1px solid darkblue;
+    margin-top: 5px;
+    border-radius: 5px;
+    gap: 3px;
+}
+
+.map-shown {
     height: 100%;
     width: 100%;
-    border: 1px solid white;
+    border: 2px solid lightgreen;
     border-radius: 5px;
-    margin: 5px;
+    margin: 10px;
+    padding: 2px;
+    transform: scale(1);
+    /* transform: translateX(0); */
+    opacity: 1;
+    transition: transform 0.7s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.map-hidden {
+    /* display: none; */
+    height: 100%;
+    width: 0;
+    transform: scale(0);
+    /* transform: translateX(-300%); */
+    transition: transform 0.7s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: 1;
+    opacity: 0;
+    overflow: hidden;
 }
 
 .toggle-search-button {

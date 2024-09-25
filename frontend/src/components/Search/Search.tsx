@@ -1,6 +1,7 @@
 import { useState, useEffect, ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import AncestorCard from "./../../AncestorCard";
+import Pagination from "../Pagination";
 import "./Search.css";
 
 interface Ancestor {
@@ -154,25 +155,11 @@ export default function Search({ searchValues }: SearchProps) {
           <option value="100">100 résultats par page</option>
         </select>
       </div>
-      <div className="pagination-block">
-        {currentPage > 0 && (
-          <>
-            {currentPage > 1 && (
-              <button onClick={() => handlePageChange(currentPage - 1)}>
-                Précédent
-              </button>
-            )}
-            <span>
-              Page {`${currentPage}`} - {`${totalPages}`}{" "}
-            </span>
-            {currentPage > 0 && currentPage < totalPages && (
-              <button onClick={() => handlePageChange(currentPage + 1)}>
-                Suivant
-              </button>
-            )}
-          </>
-        )}
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
       {/*Travailler le H1 pour ne pas avoir les guillemets quand il n'y a pas de recherche initiale*/}
       <div className="results-grid">
         {paginatedAncestors.map((ancestor) => {
