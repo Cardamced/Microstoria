@@ -1,4 +1,4 @@
-import { AncestorsResponse, AncestorResponse } from './types/types';
+import { AncestorsResponse, AncestorResponse } from './../../shared/types/types';
 // import { CreateAncestorDto } from './backend/src/ancestors/dto/create-ancestor.dto';
 
 export async function getAncestors(): Promise<AncestorsResponse> {

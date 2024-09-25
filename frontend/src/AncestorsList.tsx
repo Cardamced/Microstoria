@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAncestors } from "./api-fetch-ancestors";
 import "./AncestorsList.css";
-import { AncestorsResponse } from "./types/types";
+import { AncestorsResponse } from "./../../shared/types/types";
 import AncestorCard from "./AncestorCard";
 import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
+import ScrollToTopButton from "./components/Buttons/ScrollToTopButton";
 
 export default function AncestorsList({ id }: { id: number }) {
   const [ancestors, setAncestors] = useState<AncestorsResponse | null>([]); // Utilisation de l'état pour stocker les ancêtres
@@ -35,7 +36,7 @@ export default function AncestorsList({ id }: { id: number }) {
 
   return (
     <>
-      <div className="coucou">
+      <div className="container">
         <h1>Liste des ancêtres</h1>
         <div className="cards">
           {ancestors ? (
@@ -45,10 +46,11 @@ export default function AncestorsList({ id }: { id: number }) {
                   key={ancestor.id}
                   ancestor={ancestor}
                   onClick={() => handleCardClick(ancestor.id.toString())}
+                  className=""
                 />
               ))
             ) : (
-              <div>Loading...</div>
+              <div>Chargement...</div>
             )
           ) : (
             <div>Pas d'ancêtre...</div>
@@ -64,6 +66,7 @@ export default function AncestorsList({ id }: { id: number }) {
           Créer un nouvel ancêtre
         </button>
       </div>
+      <ScrollToTopButton />
     </>
   );
 }
