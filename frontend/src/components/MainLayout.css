@@ -1,0 +1,22 @@
+.Nav-style {
+    display: flex;
+    background: pink;
+    height: auto;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    border-radius: 5px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    background-color: transparent;
+}

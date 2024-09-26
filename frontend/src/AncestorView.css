@@ -1,0 +1,42 @@
+/* Style de la page d'affichage Ancêtre / events / sources */
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width:auto;
+    background-color: green;
+    border: 6px solid black;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+    margin: 30px;
+}
+
+button {
+    /* display: flex;*/
+    justify-content: center;
+    margin: 10px;
+    padding: 12px;
+    border: 3px solid #e0e0e000;
+    border-radius: 15px;
+}
+
+button:hover {
+    background-color: var(--primary-light-blue);
+    border: 3px solid var(--primary-dark-blue);
+}
+
+.error {
+    height: 80px;
+    width: auto;
+    background-color: rgba(255, 0, 0, 0.533);
+    border: 6px solid black;
+    border-radius: 15px;
+    align-content: center;
+}

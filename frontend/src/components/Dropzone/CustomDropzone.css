@@ -1,0 +1,22 @@
+.dropzone {
+  background: transparent;
+  /* display: flex; */
+  /* flex-direction: column; */
+  border: 2px dashed lightgray;
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  width: 80px;
+  height: auto;
+}
+
+.dropSign {
+  border : none;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  background-color: transparent;
+  box-shadow: none;
+  opacity: 0.1;
+}

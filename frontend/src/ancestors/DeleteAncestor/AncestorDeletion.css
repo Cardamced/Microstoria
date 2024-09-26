@@ -1,0 +1,15 @@
+.success {
+    color: rgba(0, 128, 0, 0.415);
+    height: 30px;
+    width: auto;
+    border: 3px black solid;
+    border-radius: 15px;
+}
+
+.error {
+    color: rgba(255, 0, 0, 0.378);
+    height: 30px;
+    width: auto;
+    border: 3px black solid;
+    border-radius: 15px;
+}
