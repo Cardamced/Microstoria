@@ -11,6 +11,8 @@ interface AncestorCardProps {
 
 // On définit une variable AncestorCard qui prend en paramètre un objet ancestor et la fonction onClick en prop.
 const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
+
+  console.log("ancestor data:", ancestor);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [shouldShowButton, setShouldShowButton] = useState<boolean>(false);
   const occupationRef = useRef<HTMLDivElement>(null);

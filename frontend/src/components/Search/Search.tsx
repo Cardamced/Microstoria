@@ -10,6 +10,8 @@ interface Ancestor {
   lastname: string;
   birthdate: Date;
   death_date: Date;
+  wedding_date: Date;
+  wedding_place: string;
 }
 
 interface SearchProps {
@@ -19,10 +21,19 @@ interface SearchProps {
     birthdate?: string;
     birthdateStart?: string;
     birthdateEnd?: string;
+    weddingDate?: string;
+    weddingDateStart?: string;
+    weddingDateEnd?: string;
     deathDate?: string;
     deathDateStart?: string;
     deathDateEnd?: string;
   };
+}
+
+// Recherche tenant compte des diacritiques.
+const normalizeString = (str: string | null): string => {
+  if (!str) return "";
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 export default function Search({ searchValues }: SearchProps) {
@@ -35,6 +46,7 @@ export default function Search({ searchValues }: SearchProps) {
   const handleButtonClick = () => {
     navigate("/ancestors");
   };
+
 
   // Pagination des résultats d'affichage des ancêtres.
   const handleResultsPerPageChange = (event: any) => {
@@ -65,18 +77,21 @@ export default function Search({ searchValues }: SearchProps) {
       searchValues.birthdate ||
       searchValues.birthdateStart ||
       searchValues.birthdateEnd ||
+      searchValues.weddingDate ||
+      searchValues.weddingDateStart ||
+      searchValues.weddingDateEnd ||
       searchValues.deathDate ||
       searchValues.deathDateStart ||
       searchValues.deathDateEnd
     ) {
       console.log("searchValues:", searchValues); // Log de vérification des valeurs de recherche
       const filtered = ancestors.filter((ancestor: Ancestor) => {
-        const firstnameMatch = ancestor.firstname
-          .toLowerCase()
-          .includes(searchValues.firstname.toLowerCase());
-        const lastnameMatch = ancestor.lastname
-          .toLowerCase()
-          .includes(searchValues.lastname.toLowerCase());
+        const firstnameMatch = normalizeString(ancestor.firstname).includes(
+          normalizeString(searchValues.firstname)
+        );
+        const lastnameMatch = normalizeString(ancestor.lastname).includes(
+          normalizeString(searchValues.lastname)
+        );
         const birthdateMatch = searchValues.birthdate
           ? new Date(ancestor.birthdate).toISOString().split("T")[0] ===
             searchValues.birthdate
@@ -88,6 +103,21 @@ export default function Search({ searchValues }: SearchProps) {
         const birthdateEndMatch = searchValues.birthdateEnd
           ? new Date(ancestor.birthdate).getFullYear() <=
             parseInt(searchValues.birthdateEnd)
+          : true;
+          const weddingDateMatch = searchValues.weddingDate
+          ? ancestor.wedding_date &&
+            new Date(ancestor.wedding_date).toISOString().split("T")[0] ===
+              searchValues.weddingDate
+          : true;
+        const weddingDateStartMatch = searchValues.weddingDateStart
+          ? ancestor.wedding_date &&
+            new Date(ancestor.wedding_date).getFullYear() >=
+              parseInt(searchValues.weddingDateStart)
+          : true;
+        const weddingDateEndMatch = searchValues.weddingDateEnd
+          ? ancestor.wedding_date &&
+            new Date(ancestor.wedding_date).getFullYear() <=
+              parseInt(searchValues.weddingDateEnd)
           : true;
         const deathDateMatch = searchValues.deathDate
           ? new Date(ancestor.death_date).toISOString().split("T")[0] ===
@@ -107,6 +137,9 @@ export default function Search({ searchValues }: SearchProps) {
           birthdateMatch &&
           birthdateStartMatch &&
           birthdateEndMatch &&
+          weddingDateMatch &&
+          weddingDateStartMatch &&
+          weddingDateEndMatch &&
           deathDateMatch &&
           deathDateStartMatch &&
           deathDateEndMatch
@@ -163,12 +196,12 @@ export default function Search({ searchValues }: SearchProps) {
       {/*Travailler le H1 pour ne pas avoir les guillemets quand il n'y a pas de recherche initiale*/}
       <div className="results-grid">
         {paginatedAncestors.map((ancestor) => {
-          const isFirstnameMatch: boolean = ancestor.firstname
-            .toLowerCase()
-            .includes(searchValues.firstname.toLowerCase());
-          const isLastnameMatch: boolean = ancestor.lastname
-            .toLowerCase()
-            .includes(searchValues.lastname.toLowerCase());
+          const isFirstnameMatch: boolean = normalizeString(ancestor.firstname).includes(
+            normalizeString(searchValues.firstname)
+          );
+          const isLastnameMatch: boolean = normalizeString(ancestor.lastname).includes(
+            normalizeString(searchValues.lastname)
+          );
           const cardClass = isFirstnameMatch
             ? "ancestor-card red-border"
             : isLastnameMatch

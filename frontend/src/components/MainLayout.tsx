@@ -8,26 +8,26 @@ export default function MainLayout() {
   const [searchValues, setSearchValues] = useState<{
     firstname: string;
     lastname: string;
-    birthdate?: string;
-    birthdateStart?: string;
-    birthdateEnd?: string;
-    deathDate?: string;
+    birthdate?: string | null;
+    birthdateStart?: string | null;
+    birthdateEnd?: string | null;
+    deathDate?: string | null;
   }>({
     firstname: "",
     lastname: "",
-    birthdate: undefined,
-    birthdateStart: "",
-    birthdateEnd: "",
-    deathDate: "",
+    birthdate: null,
+    birthdateStart: null,
+    birthdateEnd: null,
+    deathDate: null,
   });
 
   const handleSearch = (values: {
     firstname: string;
     lastname: string;
-    birthdate?: string;
-    birthdateStart?: string;
-    birthdateEnd?: string;
-    deathDate?: string;
+    birthdate?: string | null;
+    birthdateStart?: string | null;
+    birthdateEnd?: string | null;
+    deathDate?: string | null;
   }) => {
     console.log("Search values from MainLayout:", values);
     setSearchValues(values);
