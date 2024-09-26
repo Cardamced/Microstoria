@@ -152,6 +152,14 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
       return;
     }
     if (
+      weddingDateStart &&
+      weddingDateEnd &&
+      parseInt(weddingDateEnd) < parseInt(weddingDateStart)
+    ) {
+      alert("La date de début doit être antérieure à la date de fin.");
+      return;
+    }
+    if (
       deathDateStart &&
       deathDateEnd &&
       parseInt(deathDateEnd) < parseInt(deathDateStart)

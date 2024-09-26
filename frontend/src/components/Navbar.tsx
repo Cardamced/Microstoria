@@ -8,10 +8,15 @@ interface NavbarProps {
   onSearch: (values: {
     firstname: string;
     lastname: string;
-    birthdate?: string;
-    birthdateStart?: string;
-    birthdateEnd?: string;
-    deathDate?: string;
+    birthdate?: string | null;
+    birthdateStart?: string | null;
+    birthdateEnd?: string | null;
+    weddingDate?: string | null;
+    weddingDateStart?: string | null;
+    weddingDateEnd?: string | null;
+    deathDate?: string | null;
+    deathDateStart?: string | null;
+    deathDateEnd?: string | null;
   }) => void;
 }
 
@@ -63,10 +68,10 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
     <div className={`navbar ${hidden ? "hidden" : ""}`}>
       <nav className="navbar-list">
         <li className="nav-item">
-          <Link to="/">Entrée</Link>
+          <Link to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <Link to="/home">Accueil</Link>
+          <Link to="/home">Recherche</Link>
         </li>
         <li className="nav-item">
           <Link to="/ancestors">Ancêtres</Link>

@@ -22,13 +22,13 @@ interface FormDataTemp {
 const transformToFormDataTemp = (formData: FormData): FormDataTemp => {
   return {
     birthdate: formData.birthdate
-      ? formData.birthdate.toISOString().split("T")[0]
+      ? formData.birthdate.toLocaleDateString("fr-CA").split("T")[0]
       : null,
     wedding_date: formData.wedding_date
-      ? formData.wedding_date.toISOString().split("T")[0]
+      ? formData.wedding_date.toLocaleDateString("fr-CA").split("T")[0]
       : null,
     death_date: formData.death_date
-      ? formData.death_date.toISOString().split("T")[0]
+      ? formData.death_date.toLocaleDateString("fr-CA").split("T")[0]
       : null,
   };
 };
