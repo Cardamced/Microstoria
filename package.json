@@ -21,6 +21,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@nestjs/cli": "^10.4.5",
     "@nestjs/platform-express": "^10.3.10",
     "@types/react-datepicker": "^6.2.0",
     "date-fns": "^3.6.0",
