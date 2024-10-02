@@ -4,7 +4,9 @@ import { getAncestorsById } from "./api-fetch-ancestors";
 import { AncestorResponse } from "./../../shared/types/types";
 import AncestorCard from "./AncestorCard";
 import "./AncestorView.css";
+import AncestorEdit from "./ancestors/EditAncestor/EditAncestor";
 import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
+import EditAncestor from "./ancestors/EditAncestor/EditAncestor";
 
 export default function AncestorView({ ancestorId }: { ancestorId: number }) {
   const { id } = useParams<{ id: string }>();
@@ -62,6 +64,7 @@ export default function AncestorView({ ancestorId }: { ancestorId: number }) {
         </button>
       </div>
       {ancestor && <AncestorDeletion ancestorId={Number(id)} />}
+      {ancestor && <EditAncestor id={0} />}
     </>
   );
 }

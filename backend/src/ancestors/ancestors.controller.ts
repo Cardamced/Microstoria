@@ -4,6 +4,7 @@ import {
   Body,
   Get,
   Put,
+  Patch,
   Delete,
   Param,
   Query,
@@ -35,6 +36,17 @@ export class AncestorsController {
   @Put(':id')
   async updateCompleteAncestor(@Body() updateAncestorDto: UpdateAncestorDto) {
     return await this.ancestorsService.updateAncestor(updateAncestorDto);
+  }
+
+  @Patch(':id')
+  async updatePartialAncestor(
+    @Param('id') id: number,
+    @Body() partialUpdateDto: Partial<UpdateAncestorDto>,
+  ) {
+    return await this.ancestorsService.updatePartialAncestor(
+      id,
+      partialUpdateDto,
+    );
   }
 
   // TODO : Prévoir insertion d'une méthode @Patch(':id') pour les mises à jour partielles

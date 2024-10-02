@@ -7,6 +7,7 @@ import App from "./App";
 import SingleFileUploader from "./components/SingleFileUploader/SingleFileUploader";
 import Home from "./pages/Home";
 import MainLayout from "./components/MainLayout";
+import EditAncestor from "./ancestors/EditAncestor/EditAncestor";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
       {
         path: "/ancestors/:id",
         element: <AncestorView ancestorId={0} />,
+        children: [{
+          path: "/ancestors/:id/edit",
+          element: <EditAncestor id={0} />
+        }
+        ]
       },
       {
         path: "/ancestors/new",

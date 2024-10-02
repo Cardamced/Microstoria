@@ -2,10 +2,6 @@
     4% {
         transform: translateX(-100%);
     }
-
-    /* 50% {
-        transform: translateX(-50%);
-    } */
     100% {
         transform: translateX(0);
     }
@@ -15,15 +11,10 @@
     4% {
         transform: translateX(0);
     }
-
-    /* 50% {
-        transform: translateX(-50%);
-    } */
     100% {
         transform: translateX(-100%);
     }
 }
-
 
 .search-bar-test { /* conteneur flou du formulaire avancé et de la carte */
     position: absolute;
@@ -36,11 +27,8 @@
     min-width: 1500px; /* Largeur minimale */
     max-width: 100%; /* Largeur maximale */
     max-height: 100vh; /* Hauteur maximale pour permettre le défilement */
-    /* overflow-y: auto; Ajout d'une barre de défilement verticale */
     background-color: rgba(15, 38, 2, 0.106);
-    /* background-color: rgba(8, 38, 2, 0.278); */
     border: 2px transparent;
-    /* border: 2px solid var(--primary-dark-blue); */
     border-radius: 5px;
     backdrop-filter: blur(10px);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
@@ -52,7 +40,6 @@
 }
 
 .search-bar-test.hidden {
-    /* display: none; */
     position: absolute;
     top: 100%;
     left: 4%;
@@ -83,12 +70,9 @@
 /*Jauges de réglage des intervalles de dates*/
 .search-input-range-birthdate[type="range"],
 .search-input-range-deathdate[type="range"] {
-    -webkit-appearance: none;
-    /* Supprime le style par défaut de Webkit */
-    -moz-appearance: none;
-    /* Supprime le style par défaut de Firefox */
-    appearance: none;
-    /* Propriété standard. */
+    -webkit-appearance: none;/* Supprime le style par défaut de Webkit */
+    -moz-appearance: none;/* Supprime le style par défaut de Firefox */
+    appearance: none;/* Propriété standard. */
     width: 90%;
     height: 8px;
     background: #ddd;
@@ -99,8 +83,7 @@
 
 .search-input-range-birthdate[type="range"]::-webkit-slider-thumb,
 .search-input-range-deathdate[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    /* Supprime le style par défaut de Webkit */
+    -webkit-appearance: none;/* Supprime le style par défaut de Webkit */
     appearance: none;
     width: 20px;
     height: 20px;

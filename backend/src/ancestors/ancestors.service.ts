@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Ancestor } from './ancestor.entity';
@@ -56,6 +56,20 @@ export class AncestorsService {
       updateAncestorDto as DeepPartial<Ancestor>,
     );
     return this.getAncestor(updateAncestorDto.id);
+  }
+
+  async updatePartialAncestor(
+    id: number,
+    partialUpdateDto: Partial<UpdateAncestorDto>,
+  ): Promise<Ancestor> {
+    const ancestor = await this.ancestorsRepository.findOneBy({ id });
+    if (!ancestor) {
+      throw new NotFoundException(`Ancestor with id ${id} not found`);
+    }
+    // mise à jour partielle
+    Object.assign(ancestor, partialUpdateDto);
+
+    return this.ancestorsRepository.save(ancestor);
   }
 
   deleteAncestor(id: number): void {
