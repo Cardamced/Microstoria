@@ -1,23 +1,51 @@
 import * as React from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import SingleFileUploader from "../../components/SingleFileUploader/SingleFileUploader";
 import DatePicker from "react-datepicker";
 import { fr } from "date-fns/locale";
-import { format } from "date-fns";
 import { Ancestor } from "../../../../shared/types/types";
 import { Gender } from "../../../../backend/src/ancestors/ancestor.entity";
-import "./AncestorNewForm.css";
+import "./EditAncestor.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 
-type FormData = Ancestor;
+const calculateYearDifference = (dateSpan: {
+  startDate: Date;
+  endDate: Date;
+}): number => {
+  return dateSpan.endDate.getFullYear() - dateSpan.startDate.getFullYear();
+};
+
+type FormData = {
+  lastname: string;
+  firstname: string;
+  birthdate: Date | null;
+  birth_place: string | null;
+  wedding_date: Date | null;
+  wedding_place: string | null;
+  death_date: Date | null;
+  death_place: string | null;
+  gender: Gender | null;
+  occupation: string | null;
+  image: string | null;
+};
+
+// interface editAncestorProps {
+//     id: number;
+// }
 
 interface FormDataTemp {
   birthdate?: string | null;
   wedding_date?: string | null;
   death_date?: string | null;
 }
+
+const formatDateForMySQL = (date: Date | null): string | null => {
+  if (!date) return null;
+  return format(date, 'yyyy-MM-dd');
+};
 
 const transformToFormDataTemp = (formData: FormData): FormDataTemp => {
   return {
@@ -43,7 +71,9 @@ function convertEmptyStringsToNull<T>(obj: T): T {
   return newObj;
 }
 
-export default function CreateAncestor() {
+export default function EditAncestor() {
+// { id: number }: editAncestorProps
+  const { id } = useParams<{ id: string }>();
   const {
     control,
     register,
@@ -51,9 +81,10 @@ export default function CreateAncestor() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+
   const navigate = useNavigate();
-  const [isSubmitted, setIsSubmitted] = useState<Boolean>(false);
-  const [showSuccessModal, setShowSuccessModal] = useState<Boolean>(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
   const dateFormat = "dd/MM/yyyy"; // variable qui change le format attendu.
@@ -62,17 +93,44 @@ export default function CreateAncestor() {
     endDate: new Date(),
   };
 
-  function calculateYearDifference(dateSpan: {
-    startDate: Date;
-    endDate: Date;
-  }) {
-    const millisecondsInAYear = 1000 * 60 * 60 * 24 * 365.25; // Prendre en compte les années bissextiles
-    const yearDifference = Math.floor(
-      (dateSpan.endDate.getTime() - dateSpan.startDate.getTime()) /
-        millisecondsInAYear
-    );
-    return yearDifference;
-  }
+  useEffect(() => {
+    // Fetch the ancestor data and set the form values
+    const fetchAncestor = async () => {
+      try {
+        const response = await fetch(`http://localhost:3009/ancestors/${id}`);
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+        }
+        const data: FormData = await response.json();
+
+        // Conversion des string dates en objets Date ou null.
+        const parseDates = (dateString: string | null): Date | null =>
+          dateString ? new Date(dateString) : null;
+
+        setValue("lastname", data.lastname || "");
+        setValue("firstname", data.firstname || "");
+        setValue("birthdate", parseDates(data.birthdate as string | null));
+        setValue("birth_place", data.birth_place || null);
+        setValue("wedding_date", parseDates(data.wedding_date as string | null));
+        setValue("wedding_place", data.wedding_place || null);
+        setValue("death_date", parseDates(data.death_date as string | null));
+        setValue("death_place", data.death_place || null);
+        setValue("gender", data.gender || null);
+        setValue("occupation", data.occupation || null);
+        setValue("image", data.image || null);
+        
+        setUploadedImageUrl(data.image || null);
+        console.log("Uploaded image", data.image);
+      } catch (error) {
+        console.error("Erreur", error);
+        setErrorMessage(
+          "Erreur lors de la récupération des données. Veuillez réessayer."
+        );
+      }
+    };
+
+    fetchAncestor();
+  }, [id, setValue]);
 
   const handleGenderChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -88,34 +146,39 @@ export default function CreateAncestor() {
 
   if (uploadedImageUrl) {
     console.log(
-      "URL de l'image à afficher dans AncestorNewForm :",
+      "URL de l'image à afficher dans EditAncestor :",
       uploadedImageUrl
     );
   }
 
   const onSubmit: SubmitHandler<FormData> = async (formData: FormData) => {
     setIsSubmitted(true);
+    setErrorMessage("");
 
     const formDataTemp: FormDataTemp = transformToFormDataTemp(formData);
     const dataToSubmit = convertEmptyStringsToNull({
       ...formData,
-      ...formDataTemp,
+      birthdate: formData.birthdate ? formatDateForMySQL(formData.birthdate) : null,
+        wedding_date: formData.wedding_date ? formatDateForMySQL(formData.wedding_date) : null,
+        death_date: formData.death_date ? formatDateForMySQL(formData.death_date) : null,
     });
 
     try {
-      const response = await fetch("http://localhost:3009/ancestors/new", {
-        method: "POST",
+      const response = await fetch(`http://localhost:3009/ancestors/${id}`, {
+        method: "PATCH",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(dataToSubmit),
       });
+      console.log(dataToSubmit, "data to submit");
       if (!response.ok) {
-        throw new Error("Erreur lors de l'enregistrement des données");
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.message || `HTTP error! status: ${response.status}`);
       }
 
       const result = await response.json();
-      console.log("enregistrement réussi :", result);
+      console.log("mise à jour réussie :", result);
       setShowSuccessModal(true);
       setTimeout(() => {
         setShowSuccessModal(false);
@@ -126,7 +189,7 @@ export default function CreateAncestor() {
     } catch (error) {
       console.error("Erreur", error);
       setErrorMessage(
-        "Erreur lors de l'enregistrement des données. Veuillez réessayer."
+        "Erreur lors de la mise à jour des données. Veuillez réessayer."
       );
     } finally {
       setIsSubmitted(false);
@@ -136,7 +199,7 @@ export default function CreateAncestor() {
   return (
     <>
       <div className="form-container">
-        <h1>Ajout d'un nouvel ancêtre</h1>
+        <h1>Édition d'un ancêtre</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-container">
             <label className="label-style">Nom</label>
@@ -159,11 +222,10 @@ export default function CreateAncestor() {
                   Image
                 </label>
               </div>
-              {/* <input className="input-style" {...register("image")} /> */}
               <SingleFileUploader
                 onUploadSuccess={handleUploadSuccess}
                 {...register("image")}
-                />
+              />
             </div>
           </div>
           <div className="input-container">
@@ -265,14 +327,14 @@ export default function CreateAncestor() {
             <label className="label-style">Métier</label>
             <input className="input-style" {...register("occupation")} />
           </div>
-          <button type="submit" className="click">
-            Enregistrer
+          <button type="submit" className="click" disabled={isSubmitted}>
+          {isSubmitted ? "Enregistrement..." : "Enregistrer"}
           </button>
         </form>
       </div>
       {showSuccessModal && (
         <div className="modal">
-          <p>Enregistrement réussi !</p>
+          <p>Mise à jour réussie !</p>
         </div>
       )}
       {errorMessage && (
