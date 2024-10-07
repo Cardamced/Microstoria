@@ -1,0 +1,195 @@
+/*Style desktop*/
+
+/* TODO : Prévoir style mobile : en-dessous de 768px, par exemple, les labels des champs passent au-dessus des champs.*/
+/*NB : La dropzone se réduit automatiquement*/
+
+.form-container {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0.438);
+    color: var(--primary-dark-blue);
+    border: 4px solid var(--primary-dark-blue);
+    border-radius: 15px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: beige;
+    align-items: center;
+    color: var(--primary-dark-blue);
+    padding: 5px;
+    border: 4px solid var(--primary-dark-blue);
+    border-radius: 15px;
+    width: auto;
+    height: auto;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: row; /* "Column" Pour que les éléments soient alignés verticalement ; à conserver pour le mode mobile */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* Pour que les éléments occupent toute la largeur du form */
+    max-width: 480px;
+    /* Ajustez selon vos besoins */
+    margin-bottom: 5px;
+}
+
+.dropzone-container {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    border: 2px solid var(--primary-dark-blue);
+    background-color: lightblue;
+}
+
+.input-container-image {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    /* border: 1px solid var(--primary-dark-blue); */
+    background-color: transparent !important;
+}
+
+.image {
+    display: flex;
+    background: blue;
+    width: auto;
+    height: 70px;
+    text-decoration: underline;
+    color: white;
+    /* border-radius: 50%; */
+    margin: 5px;
+}
+
+.input-style,
+.select {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-dark-blue);
+}
+
+.input-style-date {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-dark-blue);
+    width: 180px;
+    font-size: 14px;
+}
+.input-style-date::placeholder {
+    font-size: 13px;
+    color: var(--primary-light-blue);
+}
+
+.label-style {
+    display: flex;
+    color: var(--primary-dark-blue);
+    margin: 5px;
+}
+
+.select {
+    width: 195px;
+    height: 30px;
+}
+
+.modal {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* top: 50%;
+    left: 40%; */
+    background-color: rgba(0, 128, 0, 0.321);
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark-blue);
+    padding: 5px;
+    border: 2px solid var(--primary-dark-blue);
+    border-radius: 15px;
+    width: 600px;
+}
+
+button.click {
+    background-color: var(--primary-dark-blue);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px var(--primary-dark-blue);
+}
+
+button.click:hover {
+    background-color: var(--primary-light-blue);
+    border: 3px solid var(--primary-dark-blue);
+    box-shadow: inset 1px 1px 3px var(--primary-dark-blue);
+}
+
+.test {
+    position: absolute;
+    top: 25%;
+    right: 30%;
+    border: 1px solid var(--primary-dark-blue);
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+}
+
+.react-datepicker__year-dropdown,
+.react-datepicker__month-dropdown {
+    max-height: 120px;
+    overflow-y: auto; /* Ajoute une barre de défilement verticale */
+    overflow-x: hidden;
+    background-color: rgba(255, 255, 255, 0.355); /* Couleur de fond semi-transparente */
+    border: 1px solid var(--primary-light-blue); /* Bordure */
+    border-radius: 5px; /* Arrondit les coins */
+    padding: 10px; /* Ajoute du padding autour du contenu */
+    backdrop-filter: blur(2.5px); /* Applique un flou à l'arrière-plan */
+}
+
+.react-datepicker__year-dropdown {
+    max-width: 60px; /* Largeur fixe pour le sélecteur d'année */
+}
+
+.react-datepicker__month-dropdown {
+    width: auto; /* Adapte la largeur au contenu */
+    min-width: 60px; /* Assure une largeur minimale */
+}
+
+.react-datepicker__year-option,
+.react-datepicker__month-option {
+    padding: 2px; /* Ajoute du padding pour rendre les options plus grandes */
+    cursor: pointer; /* Change le curseur pour pointer */
+    transition: background-color 0.3s ease; /* Transition douce */
+}
+
+/* Style pour l'option sélectionnée */
+.react-datepicker__year-option--selected_year,
+.react-datepicker__month-option--selected_month {
+    background-color: var(--primary-dark-blue); /* Change la couleur de fond pour l'élément sélectionné */
+    color: white; /* Change la couleur du texte pour l'élément sélectionné */
+    border-radius: 5px;
+}
+
+/* Style pour l'option survolée */
+.react-datepicker__year-option:hover,
+.react-datepicker__month-option:hover {
+    background-color: var(--primary-light-blue); /* Change la couleur de fond lors du survol */
+    border-radius: 5px;
+}

@@ -1,0 +1,39 @@
+h1 {
+    text-align: center;
+    background-color: transparent;
+    font-size: 28px;
+    border: 2px solid blue;
+}
+
+.form-container-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    border: none;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    border: 2px solid var(--primary-dark-blue);
+}
+
+.image {
+    background: none !important;
+}
+
+.input-container-image {
+    flex-direction: column;
+    width: auto;
+}
+
+.dropzone-container {
+    min-width: 400px;
+    background-color: transparent !important;
+    border: none !important;
+}

@@ -1,0 +1,93 @@
+/* Style de la page d'affichage Ancêtre / events / sources */
+
+.Ancestorview-container {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: end;
+    justify-content: start;
+    width: 1280px;
+    height: auto;
+    margin-top: 20px;
+    background-color: lightgreen;
+    border: none;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: auto;
+    background-color: pink;
+    border: 2px solid black !important;
+    border-radius: 5px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+    margin: 30px;
+}
+
+.Ancestor-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 1000px;
+    height: auto;
+    margin: 10px;
+    padding: 10px;
+    background-color: lightblue;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+button {
+    /* display: flex;*/
+    justify-content: center;
+    margin: 5px;
+    padding: 6px;
+    border: 3px solid #e0e0e000;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: var(--primary-light-blue);
+    border: 3px solid var(--primary-dark-blue);
+}
+
+.error {
+    height: 80px;
+    width: auto;
+    background-color: rgba(255, 0, 0, 0.533);
+    border: 6px solid black;
+    border-radius: 15px;
+    align-content: center;
+}
+
+.Edit-form {
+    display: flex;
+    position: absolute;
+    top: 100px;
+    right: 1px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    background-color: lightgreen;
+    border: none;
+}
+
+.Ancestor-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-top: 20px;
+    background-color: lightblue;
+    border: none;
+}

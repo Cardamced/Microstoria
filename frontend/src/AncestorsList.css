@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+}
+
+.h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.cards > * {
+    flex: 1 calc(12.5% - 20px);
+    /*Trois cartes par ligne*/
+    /* margin: 15px; */
+    /* box-sizing: border-box; */
+}
