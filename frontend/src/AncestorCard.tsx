@@ -113,11 +113,12 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
         {/*TODO : travailler la possibilité de créer un dropdown pour gérer du texte qui déborderait
         au cas où il y aurait beaucoup d'informations.
         Idem : prévoir Textarea avec éléments saillants de la biographie.*/}
-        <p
+        {/* <p
           ref={occupationRef}
           className={`styled-fonts ${isExpanded ? "expanded" : ""}`}
           data-label="Métier"
-        >
+        > */}
+        <p className="styled-fonts" data-label="Métier"></p>
           <p className="styled-fonts-data">{ancestor.occupation ? ancestor.occupation : " - "}</p>
           {/* {shouldShowButton && (
             <button
@@ -131,7 +132,7 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
               {isExpanded ? "▲" : "▼"}
             </button>
           )} */}
-        </p>
+        {/* </p> */}
         {/* TODO : Ajouter le numéro de Sosa automatiquement en fonction du champ renseigné par la personne qui sera le sosa 1.
           Prévoir le calcul s'il n'est pas déjà dans le script python ; intégrer champ */}
         {/* <p className="styled-fonts" data-label="Sosa :">

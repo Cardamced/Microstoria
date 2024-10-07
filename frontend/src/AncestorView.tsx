@@ -68,40 +68,57 @@ export default function AncestorView({ ancestorId }: { ancestorId: number }) {
           ) : (
             <div>Chargement...</div>
           )}
-          {/*TODO : Créer le contenu d'affichage de la biographie d'un ancêtre :
+          {/*TODO : Créer le contenu d'affichage de la biographie d'un ancêtre :*/}
           
           {ancestor ? (
             <>
               <div className="biography">
-                <AncestorBiography
+                <h3>Enfance</h3>
+                <p>Blabla</p>
+                <h3>Jeunesse</h3>
+                <p>Blabla</p>
+                <h3>Vie d'adulte</h3>
+                <p>Blabla</p>
+                <h3>âge mûr</h3>
+                <p>Blabla</p>
+                <h3>Vieillesse</h3>
+                <p>Blabla</p>
+                {/* <AncestorBiography
                   ancestor={ancestor}
                   onClick={handleButtonClick}
                   className={"ancestor-biography"}
-                />
+                {/* <AncestorBiography
+                  ancestor={ancestor}
+                  onClick={handleButtonClick}
+                  className={"ancestor-biography"}
+                /> */}
               </div>
+              
             </>
           ) : (
             <div>Chargement...</div>
-            TODO : Créer un loader animé.
-          )} */}
+            // TODO : Créer un loader animé.
+          )}
+          {/*TODO : Créer un composant pour la timeline*/}
+          <div className="Ancestor-actions">
+            <button onClick={handleButtonClick}>
+              <img
+                src="./../../backArrow.png"
+                alt="Retour vers la liste des ancêtres"
+                style={{ height: "15px", width: "15px" }}
+              />
+            </button>
+            <button onClick={toggleEdit}>
+              <img
+                src="/editer.svg"
+                alt="Modifier"
+                style={{ height: "15px", width: "15px" }}
+              />
+            </button>
+            {ancestor && <AncestorDeletion ancestorId={Number(id)} />}
+          </div>
         </div>
-        <div className="Ancestor-actions">
-          <button onClick={handleButtonClick}>
-            <img
-              src="./../../backArrow.png"
-              alt="Retour vers la liste des ancêtres"
-              style={{ height: "15px", width: "15px" }}
-            />
-          </button>
-          <button onClick={toggleEdit}>
-            <img
-              src="/editer.svg"
-              alt="Modifier"
-              style={{ height: "15px", width: "15px" }}
-            />
-          </button>
-          {ancestor && <AncestorDeletion ancestorId={Number(id)} />}
-        </div>
+        <div className="test-timeline"></div>
         <div className="Edit-form">
           {ancestor && isVisible && <EditAncestor />}
         </div>
