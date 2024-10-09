@@ -44,7 +44,7 @@ interface FormDataTemp {
 
 const formatDateForMySQL = (date: Date | null): string | null => {
   if (!date) return null;
-  return format(date, 'yyyy-MM-dd');
+  return format(date, "yyyy-MM-dd");
 };
 
 const transformToFormDataTemp = (formData: FormData): FormDataTemp => {
@@ -72,7 +72,7 @@ function convertEmptyStringsToNull<T>(obj: T): T {
 }
 
 export default function EditAncestor() {
-// { id: number }: editAncestorProps
+  // { id: number }: editAncestorProps
   const { id } = useParams<{ id: string }>();
   const {
     control,
@@ -87,6 +87,7 @@ export default function EditAncestor() {
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+  const [isImageSectionExpanded, setIsImageSectionExpanded] = useState(false);
   const dateFormat = "dd/MM/yyyy"; // variable qui change le format attendu.
   const dateSpan = {
     startDate: new Date(-62135596800000),
@@ -111,14 +112,17 @@ export default function EditAncestor() {
         setValue("firstname", data.firstname || "");
         setValue("birthdate", parseDates(data.birthdate as string | null));
         setValue("birth_place", data.birth_place || null);
-        setValue("wedding_date", parseDates(data.wedding_date as string | null));
+        setValue(
+          "wedding_date",
+          parseDates(data.wedding_date as string | null)
+        );
         setValue("wedding_place", data.wedding_place || null);
         setValue("death_date", parseDates(data.death_date as string | null));
         setValue("death_place", data.death_place || null);
         setValue("gender", data.gender || null);
         setValue("occupation", data.occupation || null);
         setValue("image", data.image || null);
-        
+
         setUploadedImageUrl(data.image || null);
         console.log("Uploaded image", data.image);
       } catch (error) {
@@ -158,9 +162,15 @@ export default function EditAncestor() {
     const formDataTemp: FormDataTemp = transformToFormDataTemp(formData);
     const dataToSubmit = convertEmptyStringsToNull({
       ...formData,
-      birthdate: formData.birthdate ? formatDateForMySQL(formData.birthdate) : null,
-        wedding_date: formData.wedding_date ? formatDateForMySQL(formData.wedding_date) : null,
-        death_date: formData.death_date ? formatDateForMySQL(formData.death_date) : null,
+      birthdate: formData.birthdate
+        ? formatDateForMySQL(formData.birthdate)
+        : null,
+      wedding_date: formData.wedding_date
+        ? formatDateForMySQL(formData.wedding_date)
+        : null,
+      death_date: formData.death_date
+        ? formatDateForMySQL(formData.death_date)
+        : null,
     });
 
     try {
@@ -174,7 +184,9 @@ export default function EditAncestor() {
       console.log(dataToSubmit, "data to submit");
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
-        throw new Error(errorData?.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData?.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       const result = await response.json();
@@ -198,9 +210,8 @@ export default function EditAncestor() {
 
   return (
     <>
-      <div className="form-container">
-        <h1>Édition d'un ancêtre</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-container-edit">
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-container">
             <label className="label-style">Nom</label>
             <input
@@ -212,18 +223,17 @@ export default function EditAncestor() {
             <label className="label-style">Prénom</label>
             <input className="input-style" {...register("firstname")} />
           </div>
-          <div className="input-container-image">
-            <div
-              className="dropzone-container"
-              style={{ display: "flex", flexDirection: "row" }}
-            >
-              <div className="image">
-                <label className="label-style" style={{ alignSelf: "start" }}>
-                  Image
-                </label>
-              </div>
+          <div
+            className="input-container-image"
+            style={{ margin: "0px", padding: "0px" }}
+          >
+            <div className="dropzone-container">
+              <label className="label-style">Image</label>
               <SingleFileUploader
                 onUploadSuccess={handleUploadSuccess}
+                imageUrl={uploadedImageUrl ?? undefined}
+                previewMaxWidth={700} // Ajoutez ces nouvelles props
+                previewMaxHeight={700} // avec les valeurs souhaitées
                 {...register("image")}
               />
             </div>
@@ -328,7 +338,7 @@ export default function EditAncestor() {
             <input className="input-style" {...register("occupation")} />
           </div>
           <button type="submit" className="click" disabled={isSubmitted}>
-          {isSubmitted ? "Enregistrement..." : "Enregistrer"}
+            {isSubmitted ? "Enregistrement..." : "Enregistrer"}
           </button>
         </form>
       </div>

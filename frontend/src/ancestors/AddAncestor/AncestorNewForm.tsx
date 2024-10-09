@@ -152,7 +152,6 @@ export default function CreateAncestor() {
           <div className="input-container-image">
             <div
               className="dropzone-container"
-              style={{ display: "flex", flexDirection: "row" }}
             >
               <div className="image">
                 <label className="label-style" style={{ alignSelf: "start" }}>

@@ -31,7 +31,9 @@ export default function AncestorDeletion({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  console.log(ancestorId, "hop");
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  console.log(ancestorId, "hop : ancestorId");
 
   async function deleteAncestor(id: number) {
     setIsLoading(true);
@@ -48,25 +50,64 @@ export default function AncestorDeletion({
         setSuccess(false);
         setTimeout(() => {
           navigate("/ancestors");
-        }, 1000); // redirection vers /ancestors après 1 sec.
-      }, 2000); // affichage du message de succès pendant 2 sec.
+        }, 900); // redirection vers /ancestors après 900ms.
+      }, 1800); // affichage du message de succès pendant 1.8 sec.
     } catch (error) {
       console.error("Erreur", error);
     } finally {
       setIsLoading(false);
     }
   }
+
+  const handleDeleteClick = () => {
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setShowModal(false);
+    deleteAncestor(ancestorId);
+  };
+
+  const handleCancelDelete = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <div>
         <button
-          onClick={() => {
-            deleteAncestor(ancestorId);
-          }}
+          className="Delete-button"
+          onClick={handleDeleteClick}
           disabled={isLoading}
         >
-          {isLoading ? "Suppression en cours..." : "supprimer l'ancêtre"}
+          {isLoading ? (
+            "Suppression en cours..."
+          ) : (
+            <img
+              src="/supprimer.svg"
+              alt="Modifier"
+              style={{ height: "15px", width: "15px" }}
+            />
+          )}
         </button>
+        {showModal && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h3>Confirmation de suppression</h3>
+              <p>
+                Êtes-vous sûr de vouloir supprimer cet ancêtre ? Cette action
+                est irréversible. Vous perdrez toutes les informations et images
+                concernant cet ancêtre.
+              </p>
+              <button onClick={handleConfirmDelete} className="confirm-button">
+                Confirmer
+              </button>
+              <button onClick={handleCancelDelete} className="cancel-button">
+                Annuler
+              </button>
+            </div>
+          </div>
+        )}
         {error && <div className="error">{error}</div>}
         {success && <div className="success">Ancêtre supprimé avec succès</div>}
       </div>

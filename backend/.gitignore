@@ -52,5 +52,17 @@ pids
 *.seed
 *.pid.lock
 
+# Fichiers d'upload non versionnés.
+/uploads
+/public/uploads
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.mov
+*.avi
+*.pdf
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

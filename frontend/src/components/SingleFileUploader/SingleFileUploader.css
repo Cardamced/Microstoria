@@ -1,18 +1,12 @@
-.conteneur-détails {
+.conteneur-détails-image {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 5px 30px 10px;
-    background-color: rgba(200, 255, 0, 0.349);
-    position: relative;
-}
-
-.truc {
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    position: relative;
+    padding: 0 0 0 5px;
+    margin: 10px;
+    width: 100%;
+    /* position: relative; */
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
 }
 
 .closing-X {
@@ -20,12 +14,12 @@
     justify-content: center;
     align-items: center;
     align-self: end;
-    margin: 5px;
+    margin-top: -25px;
     height: 20px;
     width: 20px;
-    background-color: transparent blue;
+    background-color: transparent;
     opacity: 50%;
-    border: 4px solid grey;
+    border: 2px solid grey;
     border-radius: 15px;
     color: black;
     font-size: 18px;
@@ -48,30 +42,24 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    list-style-type: none;
-    margin: 2px;
-    padding: 2px;
     flex-grow: 1;
     overflow: hidden;
-    background-color: var(--primary-dark-green);
-    border: hsl(from color h s l);
     border-radius: 4px;
     color: white;
     font-size: 0.8rem;
 }
 
 li {
-    background-color: lightseagreen;
     display: flex;
     justify-content: start;
     align-items: center;
-    margin: 0.5px;
-    padding: 0.5px;
+    margin: 3px;
     border-radius: 4px;
     font-size: 11px;
+    color: var(--primary-dark-blue);
 }
 
-.status-messages>span {
+.status-messages > span {
     margin: 2px;
     padding: 2px;
     border: 2px solid var(--primary-dark-blue);
@@ -80,6 +68,7 @@ li {
 
 .status-messages span:nth-child(1) {
     background-color: lightgreen;
+    padding-inline: 40px;
 }
 
 .status-messages span:nth-child(2) {
@@ -93,7 +82,7 @@ li {
 
 .miniature {
     display: flex;
-    margin: 5px;
+    margin-right: 65px;
     /*Déplacer style miniature ici - Pour l'instant présent inline pour débuggage.*/
 }
 
@@ -115,6 +104,10 @@ li {
 
 /*--------------------*/
 
+
+    /* width: 100px;
+    height: 100px; */
+    /* cursor: pointer; */
 
 .file-input {
     background-color: yellow;
@@ -147,4 +140,11 @@ li {
 
 .custom-button:hover {
     background-color: #45a049;
+}
+
+.preview-container {
+    background-color: rgba(0, 0, 0, 0.607) ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid black; */
+    border-radius: 5px;
 }

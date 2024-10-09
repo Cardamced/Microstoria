@@ -24,7 +24,6 @@ const CustomDropzone: React.FC<CustomDropzoneProps> = ({ onFileSelected }) => {
           <div className="dropzone" {...getRootProps()}>
             <input {...getInputProps()} />
             <img src="./../AddImage.png" alt="ajoutez une image" className="dropSign"></img>
-            {/* <p>Glissez-déposez un fichier ou cliquez...</p> Importer svg + transparent */}
           </div>
         </section>
       )}

@@ -13,3 +13,60 @@
     border: 3px black solid;
     border-radius: 15px;
 }
+
+.Delete-button {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    padding-block: 7px;
+    padding-inline: 7px;
+    border: 2px solid #e0e0e000;
+    border-radius: 5px;
+}
+
+.Delete-button:hover {
+    background-color: rgba(255, 0, 0, 0.267);
+    border: 2px solid red;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .confirm-button {
+    background-color: red;
+    color: white;
+    border: 3px solid transparent;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .cancel-button {
+    background-color: gray;
+    color: white;
+    border: 3px solid transparent;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+

@@ -6,8 +6,6 @@
 .form-container {
     display: flex;
     height: auto;
-    min-width: 500px;
-    max-width: 800px;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -15,7 +13,6 @@
     color: var(--primary-dark-blue);
     border: 4px solid var(--primary-dark-blue);
     border-radius: 15px;
-    margin: 0 auto;
 }
 
 form {
@@ -28,53 +25,53 @@ form {
     padding: 5px;
     border: 4px solid var(--primary-dark-blue);
     border-radius: 15px;
-    width: 100%;
+    width: auto;
     height: auto;
 }
 
 .input-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* "Column" Pour que les éléments soient alignés verticalement ; à conserver pour le mode mobile */
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    /* Pour que les éléments occupent toute la largeur du form */
     max-width: 480px;
+    /* Ajustez selon vos besoins */
     margin-bottom: 5px;
 }
 
-/* Styles harmonisés pour les conteneurs de dropzone */
-.dropzone-container,
-.input-container-image
- {
+.dropzone-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 480px;
-    margin: 10px 0;
-    padding: 15px;
+    width: auto;
     border: 2px solid var(--primary-dark-blue);
-    border-radius: 5px;
-    min-height: 100px;
-    box-sizing: border-box;
+    background-color: lightblue;
 }
 
-/* .dropzone-container {
-    background-color: lightblue;
-} */
+.input-container-image {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    /* border: 1px solid var(--primary-dark-blue); */
+    background-color: transparent !important;
+}
 
 .image {
     display: flex;
+    background: blue;
     width: auto;
-    max-width: 100%;
-    height: auto;
-    margin: 5px 0;
+    height: 70px;
     text-decoration: underline;
     color: white;
+    /* border-radius: 50%; */
+    margin: 5px;
 }
 
-/* Reste du CSS inchangé */
 .input-style,
 .select {
     margin: 10px;
@@ -91,7 +88,6 @@ form {
     width: 180px;
     font-size: 14px;
 }
-
 .input-style-date::placeholder {
     font-size: 13px;
     color: var(--primary-light-blue);
@@ -111,8 +107,10 @@ form {
 .modal {
     display: flex;
     position: absolute;
-    top: 50%;
-    left: 40%;
+    top: 0;
+    left: 0;
+    /* top: 50%;
+    left: 40%; */
     background-color: rgba(0, 128, 0, 0.321);
     align-items: center;
     justify-content: center;
@@ -124,8 +122,8 @@ form {
 }
 
 button.click {
-    background-color: white;
-    color: var(--primary-dark-blue);
+    background-color: var(--primary-dark-blue);
+    color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -134,11 +132,11 @@ button.click {
     padding: 10px;
     border: 3px solid transparent;
     border-radius: 5px;
-    box-shadow: 1px 1px 4px var(--primary-dark-blue);
+    box-shadow: 2px 2px 8px var(--primary-dark-blue);
 }
 
 button.click:hover {
-    background-color: none;
+    background-color: var(--primary-light-blue);
     border: 3px solid var(--primary-dark-blue);
     box-shadow: inset 1px 1px 3px var(--primary-dark-blue);
 }
@@ -195,6 +193,3 @@ button.click:hover {
     background-color: var(--primary-light-blue); /* Change la couleur de fond lors du survol */
     border-radius: 5px;
 }
-
-/* ... Le reste du CSS reste inchangé ... */
-
