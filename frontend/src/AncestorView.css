@@ -8,8 +8,8 @@
     width: 1280px;
     height: auto;
     margin-top: 20px;
-    background-color: lightgreen;
-    border: none;
+    /* background-color: lightgreen; */
+    border: 1px solid black;
 }
 
 h1{
@@ -43,7 +43,7 @@ h1{
     height: auto;
     margin: 5px;
     padding: 5px;
-    background-color: lightblue;
+    /* background-color: lightblue; */
     border: 2px solid black;
     border-radius: 5px;
     overflow: hidden;
@@ -57,7 +57,7 @@ h1{
     width: 100%;
     height: auto;
     margin-bottom: 5px;
-    background-color: rgb(98, 168, 173);
+    /* background-color: rgb(98, 168, 173); */
     border: 2px solid black;
     border-radius: 5px;
     overflow: hidden;

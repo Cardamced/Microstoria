@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getAncestorsById } from "./api-fetch-ancestors";
 import { AncestorResponse } from "./../../shared/types/types";
 import AncestorCard from "./AncestorCard";
-import MapAncestors from "./components/MapAncestors";
+import MapAncestors from "./components/Carte/MapAncestors";
 import "./AncestorView.css";
 import AncestorDeletion from "./ancestors/DeleteAncestor/AncestorDeletion";
 import EditAncestor from "./ancestors/EditAncestor/EditAncestor";
@@ -69,7 +69,7 @@ export default function AncestorView({ ancestorId }: { ancestorId: number }) {
             ) : (
               <div>Chargement...</div>
             )}
-              <MapAncestors />
+              <MapAncestors context="ancestor-view" containerClassName="ancestor-map"/>
           </div>
           {/*TODO : Créer le contenu d'affichage de la biographie d'un ancêtre :*/}
           {/* Ancestor-Biography */}

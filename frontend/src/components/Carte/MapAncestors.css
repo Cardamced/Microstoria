@@ -1,0 +1,59 @@
+/* MapAncestors.css */
+.map-container {
+  position: relative;
+  width: 85%;
+  height: 565px;
+  border: 3px solid #e2e8f0;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-right: 15px;
+  overflow: hidden;
+  z-index: 1 !important;
+}
+
+.map-header {
+  padding: 0;
+  border-bottom: 3px solid #e2e8f0;
+  background: transparent !important;
+}
+
+.map-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.map-content {
+  padding: 4px;
+  margin-bottom: 40px;
+  background: #f9f9f9;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Styles supplémentaires pour améliorer l'apparence des popups Leaflet */
+.leaflet-popup-content {
+  font-family: Georgia, Times, 'Times New Roman', serif, sans-serif;
+  color: var(--primary-dark-blue);
+}
+
+.leaflet-popup-content:hover {
+  animation: colorChange 1s forwards;
+}
+
+@keyframes colorChange {
+  0% {
+    color: var(--primary-dark-blue);
+  }
+
+  100% {
+    color: var(--secondary-light);
+  }
+}
+
+.leaflet-popup-content strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
