@@ -4,17 +4,15 @@
   /* flex-direction: column; */
   border: 2px dashed lightgray;
   border-radius: 15px;
-  padding: 10px;
   cursor: pointer;
-  margin-right: 10px;
-  width: 80px;
-  height: auto;
+  width: 160px;
+  height: 80px;
 }
 
 .dropSign {
   border : none;
   height: 100%;
-  width: 100%;
+  width: auto;
   font-size: 20px;
   background-color: transparent;
   box-shadow: none;

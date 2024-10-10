@@ -11,7 +11,6 @@ interface AncestorCardProps {
 
 // On définit une variable AncestorCard qui prend en paramètre un objet ancestor et la fonction onClick en prop.
 const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
-
   console.log("ancestor data:", ancestor);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [shouldShowButton, setShouldShowButton] = useState<boolean>(false);
@@ -43,16 +42,17 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
     if (dateString === null) {
       return "Date inconnue";
     }
-  
+
     const date = new Date(dateString);
     const day = date.getDate();
     const month = letterMonth[date.getMonth()]; // Utilise letterMonth pour obtenir le mois en lettres
     const year = date.getFullYear();
-  
+
+
     // Formatage de la date en "DD MMM YYYY"
     return `${day.toString().padStart(2, "0")} ${month} ${year}`;
   };
-  
+
   // on condionne l'affichage au genre de l'ancestor au cas où ancestor.image est null.
   // if/return en ligne possible car une seule instruction.
   const getPlaceholderImage = (gender: string | null): string => {
@@ -64,27 +64,29 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
   return (
     <div className="card" onClick={onClick}>
       <div className="card-header">
-        <h2>
+        <h2 className="prénom-nom">
           <div className="folded-corner-top-left"></div>
-        {ancestor.gender === "male" ? (
-          <img src="./manSym.svg" alt="Homme" className="gender-symbol" />
-        ) : ancestor.gender === "female" ? (
-          <img src="./womSym.svg" alt="femme" className="gender-symbol" />
-        ) : (
-          ""
-        )}
+          {ancestor.gender === "male" ? (
+            <img src="./../manSym.svg" alt="Homme" className="gender-symbol" />
+          ) : ancestor.gender === "female" ? (
+            <img src="./../womSym.svg" alt="femme" className="gender-symbol" />
+          ) : (
+            ""
+          )}
           {ancestor.firstname} {ancestor.lastname}
         </h2>
-        <div className="portrait-container">
-          <img
-            src={
-              ancestor.image
-                ? ancestor.image
-                : getPlaceholderImage(ancestor.gender || null)
-            }
-            alt="Portrait d'ancêtre"
-            className="portrait"
-          />
+        <div className="portrait-frame">
+          <div className="portrait-container">
+            <img
+              src={
+                ancestor.image
+                  ? ancestor.image
+                  : getPlaceholderImage(ancestor.gender || null)
+              }
+              alt="Portrait d'ancêtre"
+              className="portrait"
+            />
+          </div>
         </div>
         <p className="styled-fonts" data-label="Naissance"></p>
         <p className="styled-fonts-data">
@@ -105,14 +107,21 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
             : " - "}
           {ancestor.death_place ? " à " + ancestor.death_place : " - "}
         </p>
-        <p
+        {/* <p className="styled-fonts" data-label="métier"></p> */}
+        {/* <p className="styled-fonts-data">
+          {ancestor.occupation ? ancestor.occupation : " - "}
+        </p> */}
+        {/*TODO : travailler la possibilité de créer un dropdown pour gérer du texte qui déborderait
+        au cas où il y aurait beaucoup d'informations.
+        Idem : prévoir Textarea avec éléments saillants de la biographie.*/}
+        {/* <p
           ref={occupationRef}
           className={`styled-fonts ${isExpanded ? "expanded" : ""}`}
-          data-label="Métier :"
-        >
-          {" "}
-          {ancestor.occupation ? ancestor.occupation : " - "}
-          {shouldShowButton && (
+          data-label="Métier"
+        > */}
+        <p className="styled-fonts" data-label="Métier"></p>
+          <p className="styled-fonts-data">{ancestor.occupation ? ancestor.occupation : " - "}</p>
+          {/* {shouldShowButton && (
             <button
               className="read-more-btn"
               onClick={(e) => {
@@ -123,8 +132,8 @@ const ancestorCard: React.FC<AncestorCardProps> = ({ ancestor, onClick }) => {
             >
               {isExpanded ? "▲" : "▼"}
             </button>
-          )}
-        </p>
+          )} */}
+        {/* </p> */}
         {/* TODO : Ajouter le numéro de Sosa automatiquement en fonction du champ renseigné par la personne qui sera le sosa 1.
           Prévoir le calcul s'il n'est pas déjà dans le script python ; intégrer champ */}
         {/* <p className="styled-fonts" data-label="Sosa :">

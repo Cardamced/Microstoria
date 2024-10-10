@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./SearchBar.css";
+import MapAncestors from "../Carte/MapAncestors";
 
 interface SearchBarProps {
   onSearch: (searchValues: {
@@ -496,16 +497,17 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
               Recherche géographique
             </button>
           </form>
-          <div className={geoSearch ? "map-shown" : "map-hidden"}>
-            <span style={{ color: "black" }}>
+          <div className={geoSearch ? "search-map-shown" : "search-map-hidden"}>
+            {/* <span style={{ color: "black" }}>
               A venir : Recherche géographique
-            </span>
-            <img
+            </span> */}
+            {/* <img
               src="./france-departments.svg"
               alt="Placeholder carte"
               // style={{ height: "400px", cursor: "pointer" }}
               onClick={handleGeoSearchToggle}
-            />
+            /> */}
+            <MapAncestors context="search-bar" containerClassName="search-map"/>
           </div>
         </>
       )}

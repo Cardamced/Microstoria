@@ -1,30 +1,75 @@
 /* Style de la page d'affichage Ancêtre / events / sources */
 
+.Ancestorview-container {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: end;
+    justify-content: start;
+    width: 1280px;
+    height: auto;
+    margin-top: 20px;
+    /* background-color: lightgreen; */
+    border: 1px solid black;
+}
+
 h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width:auto;
-    background-color: green;
-    border: 6px solid black;
+    height: 40px;
+    width: auto;
+    background-color: pink;
+    border: 2px solid black !important;
+    border-radius: 5px;
 }
 
 .cards {
     display: flex;
+    align-self: start;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 30px;
-    margin: 30px;
+    padding: 0;
+    margin: 10px;
+    margin-top: 45px;
+}
+
+.Ancestor-details {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: auto;
+    margin: 5px;
+    padding: 5px;
+    /* background-color: lightblue; */
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.container-details-map {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+    /* background-color: rgb(98, 168, 173); */
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 button {
     /* display: flex;*/
     justify-content: center;
-    margin: 10px;
-    padding: 12px;
+    margin: 5px;
+    padding: 6px;
     border: 3px solid #e0e0e000;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 
 button:hover {
@@ -39,4 +84,100 @@ button:hover {
     border: 6px solid black;
     border-radius: 15px;
     align-content: center;
+}
+
+.Edit-form {
+    display: flex;
+    position: fixed;
+    top: 100px;
+    right: 1px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    background-color: lightsalmon;
+    border: none;
+}
+
+.Ancestor-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    width: fit-content;
+    /* margin-top: 30px; */
+    background-color: lightpink;
+    border: none;
+    border-radius: 0 0 0 10px;
+}
+
+.biography {
+    height: fit-content;
+    width: 100%;
+    background-color: rgba(128, 0, 128, 0.44);
+    border: 2px solid var(--primary-dark-blue);
+    border-radius: 5px;
+}
+
+.biography > p {
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    font-weight: 300;
+    text-align: justify;
+    text-indent: 35px;
+}
+
+.title {
+    background-color: lightgrey;
+    border: 1px solid red;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-weight: 900;
+}
+
+.timeline-tree-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 240vh;
+    margin: 5px;
+    padding: 5px;
+    background-color: lightcoral;
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.test-family-tree {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;
+    justify-content: center; */
+    width: 100%;
+    height: 30%;
+    background-color: lemonchiffon;
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.test-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70%;
+    margin: 5px;
+    padding: 0;
+    background-color: orange;
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow: hidden;
 }

@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         element: <AncestorView ancestorId={0} />,
         children: [{
           path: "/ancestors/:id/edit",
-          element: <EditAncestor id={0} />
+          element: <EditAncestor />
         }
         ]
       },

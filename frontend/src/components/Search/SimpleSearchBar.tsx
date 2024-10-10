@@ -42,7 +42,7 @@ export default function SimpleSearchBar({ onSearch }: SimpleSearchBarProps) {
           className="simple-search-input"
         />
         <button type="submit" className="simple-search-button">
-          <img src="./loupe.svg" alt="logo-loupe" />
+          <img src="./../loupe.svg" alt="logo-loupe" />
         </button>
       </form>
     </div>
